@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Registre</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="{{ asset('bundles/app/css/styleLayout.css') }}" type="text/css" media="all" />
+		{% block stylesheets %}
+		{% endblock %}
+    </head>
+
+    <body>
+		<header>
+			<div id="titre_principal">
+				<div id="vignette">
+					<img src="{{ asset('bundles/app/images/index.png') }}" alt="Logo TS" id="logo" />
+					<h1 id="titre">MEGA.PV</h1>
+				</div>
+				<div id="menu">
+					<nav>
+						<ul class="nav nav-pills">
+							<li role="presentation"><a href="register">Registre</a></li>
+							<li role="presentation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="register" role="button" aria-haspopup="true" aria-expanded="false">Gestion des parcs <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="newParc.php">Nouveau parc</a></li>
+								</ul>
+							</li>
+							<li role="presentation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="register" role="button" aria-haspopup="true" aria-expanded="false">Données et analyse <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="Donnees.php">Consulter</a></li>
+									<li><a href="#">Courbes et analyse</a></li>
+									<li><a href="#">Rapport</a></li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</header>
+
+		{% block body %}
+		{% endblock %}
+
+		<script src="{{ asset('bundles/tsregister/js/register.js') }}"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+    </body>
+	
+</html>

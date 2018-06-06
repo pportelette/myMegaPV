@@ -1,0 +1,11 @@
+ts_register_homepage:
+    path:     /
+    defaults: { _controller: TSRegisterBundle:Register:register }
+
+ts_register_editevent:
+    path:     /editevent
+    defaults: { _controller: TSRegisterBundle:Register:editEvent }
+
+ts_register_newevent:
+    path:     /newevent
+    defaults: { _controller: TSRegisterBundle:Register:newEvent }

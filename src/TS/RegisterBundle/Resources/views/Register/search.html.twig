@@ -1,0 +1,27 @@
+{% block recherche %}
+	<section class="well">
+		<form action="Registre.php" method="post">
+			<table>
+				<tr>
+					<td><label for="site">Site</label></td>
+					<td><label for="dated">Date début</label></td>
+					<td><label for="datef">Date fin</label></td>
+				</tr>	
+				<tr>
+					<td>
+					<select>
+						{% for site in listSites %}
+						<option value="">
+							{{ site.site }}
+						</option>
+						{% endfor %}
+					</select>
+					</td>
+					<td><input type="date" name="datedebut"/></td>
+					<td><input type="date" name="datefin"/></td>
+					<td><input type="submit" value="Rechercher" class="btn btn-default"/></td>				
+				</tr>
+			</table>
+		</form>	
+	</section>
+{% endblock %}

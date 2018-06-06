@@ -1,0 +1,14 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/index.html.twig #}
+
+{% extends "@TSRegister//layout.html.twig" %}
+
+
+{% block body %}	
+	<section id="containerRegister">
+	{{ include("@TSRegister/Register/search.html.twig") }}	
+	{{ include("@TSRegister/Register/events.html.twig") }}
+	{{ include("@TSRegister/Register/newEvent.html.twig") }}
+	{{ include("@TSRegister/Register/editEvent.html.twig") }}		
+	</section>
+	
+{% endblock %}

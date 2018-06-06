@@ -1,0 +1,6 @@
+ts_register:
+    resource: "@TSRegisterBundle/Resources/config/routing.yml"
+    prefix:   /register
+
+app:
+    resource: '@AppBundle/Resources/config/routing.yml'

@@ -1,0 +1,53 @@
+body
+{
+	background-color: rgb(180, 180, 207);
+}
+#titre_principal
+{
+	background-color: black;
+	display: flex;
+}
+#vignette
+{
+	display: flex;
+	align-items: center;
+}
+#titre
+{
+	font-family: inherit, sans-serif;
+    font-size: 1.5em;
+    font-weight: normal;
+	color: whitesmoke;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+#logo
+{
+	margin-left: 20px;
+	width: 30px;
+}
+
+#menu
+{
+	flex: 1;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.well
+{
+	background-color: white;
+}
+
+thead
+{
+	background-color: #7a86cb;
+	color: white;
+}
+
+td, th
+{
+	text-align: center;
+}
