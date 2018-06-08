@@ -5,12 +5,7 @@
         <h4 class="modal-title">Nouvel evenement</h4>
       </div>
       <div class="modal-body">
-        {{ form_start(formNewEvent, {'attr': {'full_name': 'formNewEvent'}}) }}
-        {{form_end(formNewEvent) }}
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-info" type="submit" data-dismiss="mdal">Enregistrer</button>
-        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+        {{ include("@TSRegister/Register/formNewEvent.html.twig") }}
       </div>
     </div>
   </div>

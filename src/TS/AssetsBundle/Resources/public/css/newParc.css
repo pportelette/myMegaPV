@@ -1,0 +1,168 @@
+/* Eléments principaux de la page */
+
+body
+{
+    font-family: Calibri, Arial, sans-serif;
+    color: #181818;
+	margin-left:20px;
+
+}
+
+/* Header */
+
+#titre_principal
+{
+    display: inline-block;
+	border: 2px solid green;
+	border-radius: 5px;
+	padding: 5px;
+	box-shadow: 0px 4px 4px #1c1a19;
+}
+
+header h1
+{
+    font-family: Calibri, serif;
+    font-size: 2.5em;
+    font-weight: normal;
+	color: grey;
+	margin-left: 00px;
+}
+
+#logo, header h1
+{
+    display: inline-block;
+	margin-bottom: 0px;
+	margin-top:0px;
+}
+/* Navigation */
+
+nav
+{
+    display: inline-block;
+    width: 1050px;
+	vertical-align: bottom;	
+	margin-left: 15px;
+}
+
+nav ul
+{
+    list-style: none;
+	text-align:center;
+	padding : 0;
+	
+}
+
+nav ul li
+{
+	margin-right: 15px;
+	float : left;
+	border:solid 1px #dedede;
+	border-radius: 5px;
+}
+nav ul li ul
+{
+	position:absolute;
+	left:-999em;
+	width: 200px;
+}
+
+nav a
+{
+    font-size: 1.3em;
+    color: white;
+    padding: 5px;
+    text-decoration: none;
+	background-color: green;
+	border-radius: 5px;
+	box-shadow: 0px 4px 4px #1c1a19;
+	display: block;
+	width: 200px;
+}
+
+nav ul li ul li a
+{	
+	background-color: rgb(84,175,88);
+	font-size: 1.1em;
+}
+
+nav a:hover
+{
+    background-color: grey;
+	box-shadow: 0px 0px 0px #1c1a19;
+
+}
+nav li:hover ul 
+{
+	left:auto;
+}
+
+/*Arbre*/
+
+#formNewParc{
+width:550px;
+padding:10px; 
+border:solid 1px #dedede;
+margin-top:13px;
+height: 480px;
+overflow:auto;
+border-radius:5px;
+background-color:gray;
+box-shadow: 0px 4px 4px #1c1a19;
+display: inline-block;
+}
+#arborescence{
+width:200px;
+padding:10px; 
+border:solid 1px #dedede;
+margin-top:13px;
+height: 480px;
+overflow:auto;
+border-radius:5px;
+background-color:gray;
+box-shadow: 0px 4px 4px #1c1a19;
+display: inline-block;
+}
+#description{
+width:80px;
+padding:10px; 
+border:solid 1px grey;
+margin-top:13px;
+height: 480px;
+overflow:auto;
+border-radius:5px;
+background-color:#dedede;
+box-shadow: 0px 4px 4px #1c1a19;
+display: inline-block;
+
+}
+h2{
+margin-top:0px;
+margin-bottom:10px;
+display: inline-block;
+}
+h3{
+margin-top:0px;
+margin-bottom:10px;
+display: inline-block;
+}
+input{
+margin : 3px;
+}
+div.tree div {
+ padding-left:15px;
+}
+div.tree div.parent div {
+ display:none;
+ cursor:default;
+}
+div.tree div.parent {
+ cursor:pointer !important;
+ background:transparent url(images/plus.gif) no-repeat top left;
+}
+div.tree div.expanded {
+ background:transparent url(images/moins.gif) no-repeat top left;
+}
+div.tree div.expanded div {
+ cursor:pointer !important;
+}
+

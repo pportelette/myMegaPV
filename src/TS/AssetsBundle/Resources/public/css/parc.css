@@ -1,0 +1,98 @@
+/*Arbre*/
+#containerAssets
+{
+	margin-top: 20px;
+	margin-right: 30px;
+	margin-left: 30px;
+}
+#clientsite{
+	height: 480px;
+	overflow:auto;
+}
+#arborescence{
+	height: 480px;
+	overflow:auto;
+}
+#description{
+	height: 480px;
+	overflow:auto;
+}
+
+div.tree div {
+ padding-left:15px;
+}
+div.tree div.parent div {
+ display:none;
+ cursor:default;
+}
+div.tree div.parent {
+ cursor:pointer !important;
+ background:transparent url(images/plus.gif) no-repeat top left;
+}
+div.tree div.expanded {
+ background:transparent url(images/moins.gif) no-repeat top left;
+}
+div.tree div.expanded div {
+ cursor:pointer !important;
+}
+input{
+text-align:center;
+}
+label{
+text-align:left;
+}
+fieldset{
+	display:inline-block;
+	vertical-align: top;
+	margin-right:40px;
+	margin-bottom:10px;
+
+}
+#general{
+	background-color:grey;
+	margin-bottom:0px;
+	
+}
+#general label{
+	font-size:0.7em;
+	width: 65px;
+	text-align:right;
+	margin-right:5px;
+}
+#general input{
+	font-size:0.7em;
+	width: 80px;
+	margin-right:20px;
+}
+
+fieldset label{
+	display:inline-block;
+	width: 90px;
+	font-weight:bold;
+
+}
+fieldset input{
+	display:inline-block;
+	width: 100px;	
+}
+#retrofit label{
+	width: 120px;
+}
+#retrofit input{
+	width: 50px;
+}
+#option label{
+	width: 50px;
+}
+#option input{
+	width: 50px;
+}
+#versionlogicielle label{
+	width: 150px;
+}
+#date label{
+	width: 200px;
+}
+#date input{
+	width: 70px;
+}

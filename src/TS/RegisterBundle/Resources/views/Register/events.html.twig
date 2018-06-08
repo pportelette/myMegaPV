@@ -29,7 +29,7 @@
 		</thead>
 		<tbody>
 			{% for event in listEvents %}
-			<tr id="{{ event.id }}" class="defaut accordion-toggle" data-toggle="collapse" data-target="#collapse{{event.id}}" onclick="SelectLigne(this)">
+			<tr id="{{ event.id }}" class="default accordion-toggle" data-toggle="collapse" data-target="#collapse{{event.id}}" onclick="SelectLigne(this)">
 			   <td>{{ event.startDate|date('d/m/Y H:i') }}</td>
 			   <td>{{ event.endDate|date('d/m/Y H:i') }}</td>
 			   <td>{{ event.id }}</td>
@@ -45,7 +45,7 @@
 			<tr id="coment{{ event.id }}" style="display: none" class="apparition">
 				<td class="comentTab" colspan="11">	
 					<div id="collapse{{event.id}}" class="collapse">
-						{{ event.coment }}
+						<p>{{ event.coment }}</p>
 					</div>
 				</td>
 			</tr>

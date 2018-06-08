@@ -1,3 +1,7 @@
+ts_assets:
+    resource: "@TSAssetsBundle/Resources/config/routing.yml"
+    prefix:   /assets
+
 ts_register:
     resource: "@TSRegisterBundle/Resources/config/routing.yml"
     prefix:   /register

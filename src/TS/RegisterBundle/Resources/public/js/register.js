@@ -66,7 +66,7 @@ function SelectLigne(obj)
 
 function EditChoix()
 {
- var objId, ligneElt, ecoloneElt, contenu, idev;
+ var objId, ligneElt, coloneElt, contenu, idev;
  if (ObjSelec != null)
  {
     objId = ObjSelec.id;
@@ -74,53 +74,55 @@ function EditChoix()
       ligneElt = document.getElementById(objId);
 
       contenu = ligneElt.childNodes[1].innerHTML;
-      coloneElt = document.getElementById("sitev");
+      coloneElt = document.getElementById("event_edit_startDate");
 	  coloneElt.value = contenu;
 	  
 	  contenu = ligneElt.childNodes[3].innerHTML;
-	  coloneElt = document.getElementById("idevv");
+	  coloneElt = document.getElementById("event_edit_endDate");
 	  coloneElt.value = contenu;
 	  
 	  contenu = ligneElt.childNodes[5].innerHTML;
-      coloneElt = document.getElementById("datedebut_eev");
+      coloneElt = document.getElementById("event_edit_id");
 	  coloneElt.value = contenu;
 	  
-	  contenu = ligneElt.childNodes[7].innerHTML;
-      coloneElt = document.getElementById("originev");
-	  coloneElt.value = contenu;
+	  /*contenu = ligneElt.childNodes[7].innerHTML;
+      coloneElt = document.getElementById("");
+	  coloneElt.value = contenu;*/
 	  
 	  contenu = ligneElt.childNodes[9].innerHTML;
-      coloneElt = document.getElementById("postev");
+      coloneElt = document.getElementById("event_edit_siteName");
 	  coloneElt.value = contenu;
 	  
 	  contenu = ligneElt.childNodes[11].innerHTML;
-      coloneElt = document.getElementById("equipementv");
+      coloneElt = document.getElementById("event_edit_origin");
 	  coloneElt.value = contenu;
 	  
 	  contenu = ligneElt.childNodes[13].innerHTML;
-      coloneElt = document.getElementById("consequencev");
+      coloneElt = document.getElementById("event_edit_consequence");
 	  coloneElt.value = contenu;
 	  
 	  contenu = ligneElt.childNodes[15].innerHTML;
-      coloneElt = document.getElementById("datefin_eev");
+      coloneElt = document.getElementById("event_edit_substation");
 	  coloneElt.value = contenu;
 	  
 	  contenu = ligneElt.childNodes[17].innerHTML;
-      coloneElt = document.getElementById("idintv");
+      coloneElt = document.getElementById("event_edit_equipement");
 	  coloneElt.value = contenu;
 	  
 	  contenu = ligneElt.childNodes[19].innerHTML;
-      coloneElt = document.getElementById("pertfv");
+      coloneElt = document.getElementById("event_edit_ensOperator");
 	  coloneElt.value = contenu;
 	  
 	  contenu = ligneElt.childNodes[21].innerHTML;
-      coloneElt = document.getElementById("pertnv");
-      coloneElt.value = contenu;
+      coloneElt = document.getElementById("event_edit_ensOther");
+	  coloneElt.value = contenu;
 	  
-	  contenu = ligneElt.childNodes[23].innerHTML;
-      coloneElt = document.getElementById("commentairesv");
-      coloneElt.value = contenu;
-    
+	  ligneElt = document.getElementById("collapse"+objId);
+
+	  contenu = ligneElt.childNodes[1].innerHTML;
+      coloneElt = document.getElementById("event_edit_coment");
+	  coloneElt.value = contenu;
+	      
  }
  else
  {

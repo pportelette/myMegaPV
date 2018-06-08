@@ -66,7 +66,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="equipement", type="string", length=20, nullable=true)
+     * @ORM\Column(name="equipement", type="string", length=255, nullable=true)
      */
     private $equipement;
 
@@ -91,6 +91,11 @@ class Event
      */
     private $coment;
 
+    public function __construct()
+    {
+      $this->startDate = new \Datetime();
+      $this->endDate = new \Datetime();
+    }
 
     /**
      * Get id
@@ -100,6 +105,13 @@ class Event
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        
+        return $this;
     }
 
     /**

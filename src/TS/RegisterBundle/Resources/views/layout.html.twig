@@ -10,3 +10,7 @@
         <div class="alert alert-info">Message flash : {{ message }}</div>
     {% endfor %}
 {% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('bundles/tsregister/js/register.js') }}"></script>
+{% endblock %}

@@ -1,1 +1,25 @@
-{{ form(formNew) }}
+{{ form_start(formNewEvent) }}
+
+{{ form_errors(formNewEvent) }}
+
+{{ form_row(formNewEvent.startDate) }}
+{{ form_row(formNewEvent.endDate) }}
+{{ form_row(formNewEvent.siteName) }}
+{{ form_row(formNewEvent.origin) }}
+{{ form_row(formNewEvent.consequence) }}
+{{ form_row(formNewEvent.substation) }}
+{{ form_row(formNewEvent.equipement) }}
+{{ form_row(formNewEvent.ensOperator) }}
+{{ form_row(formNewEvent.ensOther) }}
+{{ form_row(formNewEvent.coment) }}
+</div>
+<div class="modal-footer">
+    {{ form_widget(formNewEvent.Enregistrer, {'attr': {'class': 'btn btn-info'}}) }}
+    <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+</div>
+
+
+{{ form_rest(formNewEvent) }}
+
+{# Fermeture de la balise <form> du formulaire HTML #}
+{{ form_end(formNewEvent) }}

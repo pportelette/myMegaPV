@@ -19,9 +19,10 @@
 				<div id="menu">
 					<nav>
 						<ul class="nav nav-pills">
-							<li role="presentation"><a href="register">Registre</a></li>
-							<li role="presentation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="register" role="button" aria-haspopup="true" aria-expanded="false">Gestion des parcs <span class="caret"></span></a>
+							<li role="presentation"><a href="{{ path('ts_register_homepage')}}">Registre</a></li>
+							<li role="presentation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestion des parcs <span class="caret"></span></a>
 								<ul class="dropdown-menu">
+									<li><a href="{{ path('ts_assets_homepage')}}">Parcs</a></li>
 									<li><a href="newParc.php">Nouveau parc</a></li>
 								</ul>
 							</li>
@@ -41,10 +42,12 @@
 		{% block body %}
 		{% endblock %}
 
-		<script src="{{ asset('bundles/tsregister/js/register.js') }}"></script>
+		
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
+		{% block javascript %}
+		{% endblock %}
     </body>
 	
 </html>
