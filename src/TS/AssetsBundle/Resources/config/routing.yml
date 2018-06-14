@@ -1,3 +1,7 @@
 ts_assets_homepage:
     path:     /
     defaults: { _controller: TSAssetsBundle:Assets:assets }
+
+ts_assets_getsite:
+    path:      /getsite/{id}
+    defaults: { _controller: TSAssetsBundle:Assets:getSite }

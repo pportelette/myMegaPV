@@ -3,6 +3,7 @@
 namespace TS\AssetsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Site
@@ -12,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Site
 {
+    /**
+     * @ORM\OneToMany(targetEntity="TS\AssetsBundle\Entity\Substation", mappedBy="site")
+     */
+    private $substations;
+
     /**
      * @var int
      *
@@ -34,7 +40,6 @@ class Site
      * @ORM\Column(name="powerPeak", type="decimal", precision=10, scale=2)
      */
     private $powerPeak;
-
 
     /**
      * Get id.
@@ -92,5 +97,50 @@ class Site
     public function getPowerPeak()
     {
         return $this->powerPeak;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->substations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add substation.
+     *
+     * @param \TS\AssetsBundle\Entity\Substation $substation
+     *
+     * @return Site
+     */
+    public function addSubstation(\TS\AssetsBundle\Entity\Substation $substation)
+    {
+        $this->substations[] = $substation;
+
+        $substation->setSite($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove substation.
+     *
+     * @param \TS\AssetsBundle\Entity\Substation $substation
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeSubstation(\TS\AssetsBundle\Entity\Substation $substation)
+    {
+        return $this->substations->removeElement($substation);
+    }
+
+    /**
+     * Get substations.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSubstations()
+    {
+        return $this->substations;
     }
 }

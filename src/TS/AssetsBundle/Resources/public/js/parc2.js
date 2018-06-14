@@ -10,6 +10,8 @@ function SelectSite(obj)
 	div2.style = "display: none";
 	elmtt.value=idSite;
 	elmtt.innerHTML=nomSite;
+	url = "http://localhost/myMegaPV/web/app_dev.php/assets/getsite/"+idSite;
+	ajaxGet(url, readData);
 
 }
 
@@ -31,7 +33,17 @@ function request() {
 
 
 function readData(oData) {
-	var postes = oData.getElementsByTagName("poste");
+	var json=JSON.parse(oData);
+	var html = "";
+	json.listAssets.forEach(function (substation) {
+		html +="<div class=\"parent\">";
+		html += substation.name;
+		html +="</div>";
+	})
+
+	var oSelect = document.getElementById("architecture");
+	oSelect.innerHTML=html;
+	/*var postes = oData.getElementsByTagName("poste");
 	var html="";
 	for (var i=0;i<postes.length;i++){
 		var niv1 = postes[i].childNodes;
@@ -85,7 +97,7 @@ function readData(oData) {
 	}
 
 	var oSelect = document.getElementById("architecture");
-	oSelect.innerHTML=html;
+	oSelect.innerHTML=html;*/
 }
 
 function SelectMateriel(obj)

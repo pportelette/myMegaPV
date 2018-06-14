@@ -6,10 +6,10 @@
 		<div class='tree well col-md-2' id="clientsite">
 			<h2>Clients</h2>
 			{% for client in listClients %}
-			<div>
+			<div class="parent">
 				{{ client.clientName }}
 				{% for site in listSites %}
-				<div>
+				<div id="{{ site.id }}" onclick="SelectSite(this)">
 					{{ site.siteName }}
 				</div>
 				{% endfor %}
@@ -72,8 +72,4 @@
 		</div>
 	</section>
 	
-{% endblock %}
-
-{% block javascript %}
-
 {% endblock %}
