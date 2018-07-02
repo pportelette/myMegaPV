@@ -1,0 +1,8 @@
+
+{% for line in table %}
+<tr class="default line" onclick="SelectLigne(this)">
+    <td width="20%">{{ line.date }}</td>
+    <td width="40%">{{ line.energy }}</td>
+    <td width="40%">{{ line.irradiation }}</td>
+</tr>
+{% endfor %}

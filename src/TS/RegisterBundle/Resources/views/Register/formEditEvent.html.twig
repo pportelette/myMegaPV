@@ -1,9 +1,7 @@
 {{ form_start(formEditEvent) }}
 <div class="modal-body">
     {{ form_errors(formEditEvent) }}
-    <div style="display: none">
-        {{ form_row(formEditEvent.id)}}
-    </div>
+
     {{ form_row(formEditEvent.startDate) }}
     {{ form_row(formEditEvent.endDate) }}
     {{ form_row(formEditEvent.siteName) }}

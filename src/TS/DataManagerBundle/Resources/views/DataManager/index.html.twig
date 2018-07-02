@@ -1,0 +1,49 @@
+{% extends "@App//layout.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/tsdatamanager/css/style.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block body %}
+<section id="container">
+<div class="well">
+	{{ form(form)}}
+</div>
+
+<div class="well">
+    <div id="headerImport">
+		<div id="titleImport">
+			<h2>Import</h2>
+		</div>
+		<div id="buttons">
+			<input onclick="saveImport()" value="Enregistrer" class="btn btn-default"/>
+		</div>
+	</div>
+	<Br/>
+    <table id="tableau" class="table table-bordered table-condensed">
+        <thead>
+			<tr>
+			   <th width="20%">Date</th>
+			   <th width="40%">Energie injectée</th>
+			   <th width="40%">Irradiation</th>
+			</tr>
+		</thead>
+		<tbody id="importData">
+			{% for line in tab %}
+			<tr id="{{ line.id }}" class="default line" onclick="SelectLigne(this)">
+			   <td width="20%">{{ line.date|date('d/m/Y') }}</td>
+			   <td width="40%">{{ line.energy }}</td>
+			   <td width="40%">{{ line.irradiation }}</td>
+			</tr>
+			{% endfor %}
+        </tbody>
+    </table>
+</div>
+<div id="tester">
+</div>
+</section>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('bundles/tsdatamanager/js/dataManager.js') }}"></script>
+{% endblock %}

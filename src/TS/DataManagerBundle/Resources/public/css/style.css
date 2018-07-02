@@ -1,0 +1,86 @@
+#headerImport
+{
+	display: flex;
+	height: 40px;
+}
+
+#titleImport
+{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	color: #7a86cb;
+}
+
+#buttons
+{
+	flex: 1;
+	display: flex;
+	justify-content: right;
+}
+
+.default, .selection
+{
+	cursor: pointer;
+}
+
+.selection
+{
+	background-color: rgb(100, 100, 255);
+}
+
+h2
+{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	color: #7a86cb;
+}
+
+table {
+    width: 100%;   
+}
+/*
+Set table elements to block mode.  (Normally they are inline).
+This allows a responsive table, such as one where columns can be stacked
+if the display is narrow.
+*/
+ table, table>thead, table>tbody, table>thead>tr, table>tbody>tr, table>thead>tr>th, table>tbody>td {
+    display: block;
+}
+table>thead>tr:after, table>tbody>tr:after {
+    content:' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+ table>tbody {
+    overflow-y: scroll;
+    height: 400px;
+    
+}
+
+ table>thead {
+    overflow-y: scroll;    
+}
+
+/*
+We want to set <th> and <td> elements to float left.
+We also must explicitly set the width for each column (both for the <th>
+and the <td>).  We set to 20% here a default placeholder, but it can be
+overridden elsewhere.
+*/
+
+table>thead tr th
+{
+    float: left;    
+	word-wrap:break-word;
+	margin-top: 3px;     
+}
+
+table>tbody tr td 
+{
+    float: left;    
+	word-wrap:break-word;    
+}

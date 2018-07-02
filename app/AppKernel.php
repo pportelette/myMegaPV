@@ -19,6 +19,8 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new TS\RegisterBundle\TSRegisterBundle(),
             new TS\AssetsBundle\TSAssetsBundle(),
+            new TS\DataManagerBundle\TSDataManagerBundle(),
+            new Yectep\PhpSpreadsheetBundle\PhpSpreadsheetBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

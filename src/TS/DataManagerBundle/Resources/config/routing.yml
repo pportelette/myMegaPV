@@ -1,0 +1,7 @@
+ts_data_manager_homepage:
+    path:     /
+    defaults: { _controller: TSDataManagerBundle:DataManager:DataManager }
+
+ts_data_manager_save:
+    path:     /save
+    defaults: { _controller: TSDataManagerBundle:DataManager:Save }

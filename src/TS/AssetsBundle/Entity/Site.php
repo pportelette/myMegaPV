@@ -28,6 +28,11 @@ class Site
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="TS\DataManagerBundle\Entity\ImportDataRaw", mappedBy="site")
+     */
+    private $importDataRaws;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="siteName", type="string", length=30)
@@ -142,5 +147,43 @@ class Site
     public function getSubstations()
     {
         return $this->substations;
+    }
+
+    /**
+     * Add importDataRaw.
+     *
+     * @param \TS\DataManagerBundle\Entity\ImportDataRaw $importDataRaw
+     *
+     * @return Site
+     */
+    public function addImportDataRaw(\TS\DataManagerBundle\Entity\ImportDataRaw $importDataRaw)
+    {
+        $this->importDataRaws[] = $importDataRaw;
+
+        $importDataRaw->setSite($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove importDataRaw.
+     *
+     * @param \TS\DataManagerBundle\Entity\ImportDataRaw $importDataRaw
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeImportDataRaw(\TS\DataManagerBundle\Entity\ImportDataRaw $importDataRaw)
+    {
+        return $this->importDataRaws->removeElement($importDataRaw);
+    }
+
+    /**
+     * Get importDataRaws.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImportDataRaws()
+    {
+        return $this->importDataRaws;
     }
 }

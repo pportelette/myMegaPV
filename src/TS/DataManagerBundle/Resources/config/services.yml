@@ -1,0 +1,5 @@
+services:
+    ts_data_manager.import:
+        class: TS\DataManagerBundle\ImportData\ImportData
+        arguments:
+          - "@phpoffice.spreadsheet"

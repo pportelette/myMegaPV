@@ -10,7 +10,7 @@ function SelectSite(obj)
 	div2.style = "display: none";
 	elmtt.value=idSite;
 	elmtt.innerHTML=nomSite;
-	url = "http://localhost/myMegaPV/web/app_dev.php/assets/getsite/"+idSite;
+	url = "getsite/"+idSite;
 	ajaxGet(url, readData);
 
 }

@@ -1,3 +1,7 @@
+ts_data_manager:
+    resource: "@TSDataManagerBundle/Resources/config/routing.yml"
+    prefix:   /datamanager
+
 ts_assets:
     resource: "@TSAssetsBundle/Resources/config/routing.yml"
     prefix:   /assets
