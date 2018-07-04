@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use TS\RegisterBundle\Entity\Event;
 use TS\AssetsBundle\Entity\Site;
 use TS\RegisterBundle\Form\EventType;
+use TS\RegisterBundle\Form\EventEditType;
 
 class RegisterController extends Controller{
     
@@ -18,57 +19,51 @@ class RegisterController extends Controller{
 		$listEvents = $em->getRepository('TSRegisterBundle:Event')->findAll();
 
 		$event = new Event();
-		$formNewEvent = $this->createForm(EventType::class, $event, array(
-			'action' => $this->generateUrl('ts_register_newevent', ['Request'=>$request])
-		));
+		$formNewEvent = $this->createForm(EventType::class, $event);
 		
-		$formEditEvent = $this->createForm(EventType::class, $event);
-		
+		if($request->isMethod('POST') && $formNewEvent->handleRequest($request)->isValid()) {
+			$em->persist($event);
+			$em->flush();
+
+			return $this->redirectToRoute('ts_register_homepage');
+		}
+
 		return $this->render('@TSRegister/Register/register.html.twig', array(
 			'listSites' => $listSites, 
 			'listEvents' => $listEvents,
+			'event' => $request->getContent(),
 			'formNewEvent' => $formNewEvent -> createView()
 		));
     }
 	
-	public function editEventAction(Request $request, $id){
-		//$event = new Event();
+	public function editEventAction (Request $request, $id) {
+		$eventEdited = new Event();
 		$em = $this->getDoctrine()->getManager();
-		//$event->setId($id);
-		//$formEditEvent = $this->createForm(EventType::class, $event);
-		//if ($formEditEvent->handleRequest($request)->isValid()) {
+		$eventEdited = $em->getRepository('TSRegisterBundle:Event')->find($id);
+		$formEditEvent = $this->createForm(EventEditType::class, $eventEdited, array(
+			'action' => $this->generateUrl('ts_register_editevent', array('id'=>$id,'Request'=>$request))));
+		
+		if($request->isMethod('POST') && $formEditEvent->handleRequest($request)->isValid()) {
+			//$eventForm = $request->request->get('event_edit');
+			//$eventEdited->setStartDate($eventForm['startDate']);
 			$em->flush();
-			
-			$request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
-
-			return $this->redirectToRoute('ts_register_homepage');
-		//}
-	}
-	
-	public function newEventAction(Request $request){
-		$event = new Event();
-		$formNewEvent = $this->createForm(EventType::class, $event)->handleRequest($request);
-		if ($formNewEvent->isValid()) {
-			$em = $this->getDoctrine()->getManager();
-			$em->persist($event);
-			$em->flush();
-			
-			$request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
-
 			return $this->redirectToRoute('ts_register_homepage');
 		}
-    }
 
-	public function getEventAction (Request $request, $id) {
+		return $this->render('@TSRegister/Register/formEditEvent.html.twig', array(
+			'event' => $eventEdited,
+			'formEditEvent' => $formEditEvent -> createView()
+		));
+	}
+
+	public function removeEventAction (Request $request, $id) {
 		$event = new Event();
 		$em = $this->getDoctrine()->getManager();
 		$event = $em->getRepository('TSRegisterBundle:Event')->find($id);
-		$formEditEvent = $this->createForm(EventType::class, $event, array(
-			'action' => $this->generateUrl('ts_register_editevent', array('id'=>$id, 'Request'=>$request))));
 		
-		return $this->render('@TSRegister/Register/formEditEvent.html.twig', array(
-			'event' => $event,
-			'formEditEvent' => $formEditEvent -> createView()
-		));
+		$em->remove($event);
+		$em->flush();
+
+		return $this->redirectToRoute('ts_register_homepage');
 	}
 }

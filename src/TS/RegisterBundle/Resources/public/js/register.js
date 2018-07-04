@@ -10,6 +10,9 @@ function SelectLigne(obj)
 	colId="collapse"+obj.id;
 	Collapse = document.getElementById(colId);
 	coment=Collapse.innerHTML;
+
+	var removeform = document.getElementById("removeform");
+	removeform.action = "removeevent/"+obj.id;
 	if (ObjSelec!=null)
 	{
 		if (coment != "\n\t\t\t\t\t\t\n\t\t\t\t\t")
@@ -60,7 +63,7 @@ function SelectLigne(obj)
 		}
 		else
 		{
-			obj.className="selection";
+			//obj.className="selection";
 			ObjSelec = obj;
 			ComSelect = lineComent;
 			editChoice();
@@ -72,7 +75,7 @@ function editChoice() {
 	if (ObjSelec != null)
 	{
 		objId = ObjSelec.id;
-		url = "getevent/"+objId;
+		url = "editevent/"+objId;
 		ajaxGet(url, inputForm);
 	}
 	else
@@ -82,8 +85,7 @@ function editChoice() {
 }
 
 function inputForm(data) {
-	var html = data;
 	var oSelect = document.getElementById("editForm");
-	oSelect.innerHTML=html;
+	oSelect.innerHTML=data;
 }
 
