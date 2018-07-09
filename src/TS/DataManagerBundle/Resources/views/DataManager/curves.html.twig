@@ -1,0 +1,28 @@
+{% extends "@App//layout.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/tsdatamanager/css/styleCurves.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block body %}
+<section id="container">
+{{ include("@App/App/search.html.twig") }}
+
+<div id="parameters" class="well col-md-2">
+    <fieldset>Paramètres</fieldset>
+</div>
+
+<div id="linechart" class="well col-md-10" style="min-width: 400px; height: 400px;"></div>
+
+</section>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('bundles/tsdatamanager/js/dataManager.js') }}"></script>
+    <script src="{{ asset('bundles/tsdatamanager/js/jquery-1.7.1.min.js') }}"></script>
+    <script src="//code.highcharts.com/4.1.8/highcharts.js"></script>
+    <script src="//code.highcharts.com/4.1.8/modules/exporting.js"></script>
+    <script type="text/javascript">
+        {{ chart(chart) }}
+    </script>
+{% endblock %}

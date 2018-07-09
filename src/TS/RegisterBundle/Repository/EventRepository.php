@@ -2,6 +2,7 @@
 
 namespace TS\RegisterBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 /**
  * EventRepository
  *
@@ -10,4 +11,17 @@ namespace TS\RegisterBundle\Repository;
  */
 class EventRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getSelectedEvents($startDate, $endDate)
+    {
+        $qb = $this->createQueryBuilder('e');
+        $qb 
+            ->andWhere('e.startDate BETWEEN :start AND :end')
+            ->setParameter('start', $startDate)
+            ->setParameter('end',   $endDate)
+        ;
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

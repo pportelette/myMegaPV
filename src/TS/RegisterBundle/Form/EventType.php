@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class EventType extends AbstractType
 {
@@ -21,7 +22,10 @@ class EventType extends AbstractType
         $builder
             ->add('startDate',      DateTimeType::class)
             ->add('endDate',        DateTimeType::class)
-            ->add('siteName',       TextType::class)
+            ->add('site',           EntityType::class, array(
+                'class'         =>  'TSAssetsBundle:Site',
+                'choice_label'  =>  'siteName'
+            ))
             ->add('origin',         TextType::class)
             ->add('consequence',    TextType::class)
             ->add('substation',     TextType::class)

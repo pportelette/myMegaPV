@@ -1,0 +1,21 @@
+{% block recherche %}
+	<section class="well">
+        {{ form_start(formSearch) }}
+			<table>
+				<tr>
+					<td><label>Site</label></td>
+					<td><label>Date début</label></td>
+					<td><label>Date fin</label></td>
+				</tr>	
+				<tr>
+					<td>{{ form_widget(formSearch.site, {'attr': {'class': 'form-control'}}) }}</td>
+					<td><span>{{ form_widget(formSearch.startDate, {'attr': {'class': 'form-control'}}) }}</span></td>
+					<td>{{ form_widget(formSearch.endDate, {'attr': {'class': 'form-control'}}) }}</td>
+					<td>{{ form_widget(formSearch.search, {'attr': {'class': 'btn btn-primary'}}) }}</td>
+				</tr>
+			</table>
+			
+        {{ form_rest(formSearch) }}
+        {{ form_end(formSearch) }}	
+	</section>
+{% endblock %}

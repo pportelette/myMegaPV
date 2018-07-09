@@ -1,10 +1,10 @@
-#headerImport, #headerView
+#headerView
 {
 	display: flex;
 	height: 40px;
 }
 
-#titleImport, #titleView
+#titleView
 {
 	display: flex;
 	align-items: center;

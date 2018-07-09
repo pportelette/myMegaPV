@@ -46,8 +46,8 @@ function saveImport() {
 	ajaxPost(url, importData, afficher, true);
 }
 
-function afficher(data) {
-	var tester = document.getElementById("tableau");
-	tester.innerHTML = data;
+function afficher() {
+	var tester = document.getElementById("message");
+	tester.innerHTML = "<div class=\"alert alert-info\">Les données ont bien été enregistrées !</p>";
 }
 

@@ -1,19 +1,17 @@
 {% extends "@App//layout.html.twig" %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/tsdatamanager/css/style.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/tsdatamanager/css/styleView.css') }}" type="text/css" media="all" />
 {% endblock %}
 
 {% block body %}
 <section id="container">
-<div class="well">
-	{{ form(form)}}
-</div>
+{{ include("@App/App/search.html.twig") }}
 
 <div class="well">
-    <div id="headerImport">
-		<div id="titleImport">
-			<h2>Import</h2>
+    <div id="headerView">
+		<div id="titleView">
+			<h2>Consulter</h2>
 		</div>
 		<div id="buttons">
 			<input onclick="saveImport()" value="Enregistrer" class="btn btn-default"/>
@@ -23,17 +21,19 @@
     <table id="tableau" class="table table-bordered table-condensed">
         <thead>
 			<tr>
-			   <th width="20%">Date</th>
-			   <th width="40%">Energie injectée</th>
-			   <th width="40%">Irradiation</th>
+			   <th width="25%">Date</th>
+			   <th width="25%">Energie injectée (kWh)</th>
+			   <th width="25%">Irradiation (Wh/m²)</th>
+			   <th width="25%">Performance Ratio (%)</th>
 			</tr>
 		</thead>
 		<tbody id="importData">
 			{% for line in tab %}
 			<tr id="{{ line.id }}" class="default line" onclick="SelectLigne(this)">
-			   <td width="20%">{{ line.date|date('d/m/Y') }}</td>
-			   <td width="40%">{{ line.energy }}</td>
-			   <td width="40%">{{ line.irradiation }}</td>
+			   <td width="25%">{{ line.date|date('d/m/Y') }}</td>
+			   <td width="25%">{{ (line.energyInjected)|number_format(0, ',', ' ') }}</td>
+			   <td width="25%">{{ (line.irradiation * 277.77)|number_format(0, ',', ' ') }}</td>
+			   <td width="25%">{{ (line.energyInjected * 100000 / (line.irradiation * 277.77 * site.powerPeak))|number_format(2, ',', ' ') }}</td>
 			</tr>
 			{% endfor %}
         </tbody>

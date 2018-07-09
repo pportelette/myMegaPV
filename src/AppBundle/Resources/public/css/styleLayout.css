@@ -58,3 +58,10 @@ td, th
 {
 	text-align: center;
 }
+
+#appbundle_search_startDate, #appbundle_search_endDate
+{
+	border: none;
+	margin: 0px;
+	padding: 0px;
+}

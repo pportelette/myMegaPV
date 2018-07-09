@@ -28,8 +28,9 @@
 							</li>
 							<li role="presentation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="register" role="button" aria-haspopup="true" aria-expanded="false">Données et analyse <span class="caret"></span></a>
 								<ul class="dropdown-menu">
+									<li><a href="{{ path('ts_data_manager_import')}}">Importer</a></li>
 									<li><a href="{{ path('ts_data_manager_homepage')}}">Consulter</a></li>
-									<li><a href="#">Courbes et analyse</a></li>
+									<li><a href="{{ path('ts_data_manager_curves')}}">Courbes et analyse</a></li>
 									<li><a href="#">Rapport</a></li>
 								</ul>
 							</li>

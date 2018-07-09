@@ -5,3 +5,11 @@ ts_data_manager_homepage:
 ts_data_manager_save:
     path:     /save
     defaults: { _controller: TSDataManagerBundle:DataManager:Save }
+
+ts_data_manager_import:
+    path:     /import
+    defaults: { _controller: TSDataManagerBundle:DataManager:Import }
+
+ts_data_manager_curves:
+    path:     /curves
+    defaults: { _controller: TSDataManagerBundle:DataManager:Curves }

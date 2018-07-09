@@ -36,11 +36,10 @@ class Event
     private $endDate;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="site_name", type="string", length=40, nullable=true)
+     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Site")
+     * @ORM\JoinColumn(nullable= false)
      */
-    private $siteName;
+    private $site;
 
     /**
      * @var string
@@ -153,30 +152,6 @@ class Event
     public function getEndDate()
     {
         return $this->endDate;
-    }
-
-    /**
-     * Set siteName
-     *
-     * @param string $siteName
-     *
-     * @return Event
-     */
-    public function setSiteName($siteName)
-    {
-        $this->siteName = $siteName;
-
-        return $this;
-    }
-
-    /**
-     * Get siteName
-     *
-     * @return string
-     */
-    public function getSiteName()
-    {
-        return $this->siteName;
     }
 
     /**
@@ -345,5 +320,29 @@ class Event
     public function getConsequence()
     {
         return $this->consequence;
+    }
+
+    /**
+     * Set site.
+     *
+     * @param \TS\AssetsBundle\Entity\Site $site
+     *
+     * @return Event
+     */
+    public function setSite(\TS\AssetsBundle\Entity\Site $site)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site.
+     *
+     * @return \TS\AssetsBundle\Entity\Site
+     */
+    public function getSite()
+    {
+        return $this->site;
     }
 }

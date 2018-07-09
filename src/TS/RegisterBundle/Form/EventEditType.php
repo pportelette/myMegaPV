@@ -14,7 +14,7 @@ class EventEditType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->remove('siteName');
+        $builder->remove('site');
     }
 
     public function getParent()

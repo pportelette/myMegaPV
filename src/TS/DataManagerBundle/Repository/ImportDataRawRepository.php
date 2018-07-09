@@ -2,6 +2,7 @@
 
 namespace TS\DataManagerBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 /**
  * ImportDataRawRepository
  *
@@ -10,4 +11,17 @@ namespace TS\DataManagerBundle\Repository;
  */
 class ImportDataRawRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getSelectedData($startDate, $endDate)
+    {
+        $qb = $this->createQueryBuilder('i');
+        $qb 
+            ->andWhere('i.date BETWEEN :start AND :end')
+            ->setParameter('start', $startDate)
+            ->setParameter('end',   $endDate)
+        ;
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

@@ -1,6 +1,6 @@
 {% block recherche %}
 	<section class="well">
-		<form action="Registre.php" method="post">
+		<form action="Registre.php" method="post" class="form-horizontal form-group">
 			<table>
 				<tr>
 					<td><label for="site">Site</label></td>
@@ -9,7 +9,7 @@
 				</tr>	
 				<tr>
 					<td>
-					<select>
+					<select class="form-control">
 						{% for site in listSites %}
 						<option value="">
 							{{ site.siteName }}
@@ -17,12 +17,11 @@
 						{% endfor %}
 					</select>
 					</td>
-					<td><input type="date" name="datedebut"/></td>
-					<td><input type="date" name="datefin"/></td>
-					<td><input type="submit" value="Rechercher" class="btn btn-default"/></td>				
+					<td><input class="form-control" type="date" name="datedebut"/></td>
+					<td><input class="form-control" type="date" name="datefin"/></td>
+					<td><input class="form-control" type="submit" value="Rechercher" class="btn btn-default"/></td>				
 				</tr>
 			</table>
 		</form>	
-		{{ event }}
 	</section>
 {% endblock %}
