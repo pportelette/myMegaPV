@@ -1,0 +1,18 @@
+{{ form_start(formEditRow) }}
+<div class="modal-body">
+    {{ form_errors(formEditRow) }}
+
+    {{ form_row(formEditRow.date) }}
+    {{ form_row(formEditRow.energyInjected) }}
+    {{ form_row(formEditRow.irradiation) }}
+
+</div>
+<div class="modal-footer">
+    {{ form_widget(formEditRow.Enregistrer, {'attr': {'class': 'btn btn-info'}}) }}
+    <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+</div>
+
+{{ form_rest(formEditRow) }}
+
+{# Fermeture de la balise <form> du formulaire HTML #}
+{{ form_end(formEditRow) }}

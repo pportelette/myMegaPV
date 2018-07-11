@@ -8,6 +8,7 @@ function SelectLigne(obj)
 			ObjSelec.className = "default";
 			obj.className="selection";
 			ObjSelec = obj;
+			editChoice();
 		}
 		else
 		{
@@ -19,6 +20,7 @@ function SelectLigne(obj)
 	{
 			obj.className="selection";
 			ObjSelec = obj;
+			editChoice();
 	}
 }
 
@@ -51,3 +53,13 @@ function afficher() {
 	tester.innerHTML = "<div class=\"alert alert-info\">Les données ont bien été enregistrées !</p>";
 }
 
+function editChoice() {
+	objId = ObjSelec.id;
+	url = "editrow/"+objId;
+	ajaxGet(url, inputForm);
+}
+
+function inputForm(data) {
+	var oSelect = document.getElementById("editForm");
+	oSelect.innerHTML=data;
+}

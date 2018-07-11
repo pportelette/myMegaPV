@@ -10,6 +10,7 @@ use TS\DataManagerBundle\Entity\File;
 use AppBundle\Entity\Search;
 use AppBundle\Form\SearchType;
 use TS\DataManagerBundle\Entity\ImportDataRaw;
+use TS\DataManagerBundle\Form\ImportDataRawEditType;
 use Ob\HighchartsBundle\Highcharts\Highchart;
 use Zend\Json\Expr;
 
@@ -46,6 +47,39 @@ class DataManagerController extends Controller
             'formSearch'=>$formSearch->createview()
         ));
     }
+
+    public function editRowAction (Request $request, $id) {
+		$rowEdited = new ImportDataRaw();
+		$em = $this->getDoctrine()->getManager();
+		$rowEdited = $em->getRepository('TSDataManagerBundle:ImportDataRaw')->find($id);
+		$formEditRow = $this->createForm(ImportDataRawEditType::class, $rowEdited, array(
+			'action' => $this->generateUrl('ts_data_manager_editrow', array(
+                'id'=>$id,
+                'Request'=>$request)
+            )
+        ));
+		
+		if($request->isMethod('POST') && $formEditRow->handleRequest($request)->isValid()) {
+			$em->flush();
+			return $this->redirectToRoute('ts_data_manager_homepage');
+		}
+
+		return $this->render('@TSDataManager/DataManager/formEditRow.html.twig', array(
+			'row' => $rowEdited,
+			'formEditRow' => $formEditRow -> createView()
+		));
+	}
+
+	public function removeRowAction (Request $request, $id) {
+		$row = new ImportDataRaw();
+		$em = $this->getDoctrine()->getManager();
+		$row = $em->getRepository('TSDataManagerBundle:ImportDataRaw')->find($id);
+		
+		$em->remove($row);
+		$em->flush();
+
+		return $this->redirectToRoute('ts_dat_manager_homepage');
+	}
 
     public function ImportAction(Request $request)
     {
@@ -244,7 +278,7 @@ class DataManagerController extends Controller
         $yData = array(
             array(
                 'labels' => array(
-                    'formatter' => new Expr('function () { return this.value + " " }'),
+                    'formatter' => new Expr('function () { return this.value + "" }'),
                     'style'     => array('color' => '#4572A7')
                 ),
                 'gridLineWidth' => 0,
@@ -255,18 +289,18 @@ class DataManagerController extends Controller
             ),
             array(
                 'labels' => array(
-                    'formatter' => new Expr('function () { return this.value + " " }'),
+                    'formatter' => new Expr('function () { return this.value + "" }'),
                     'style'     => array('color' => '#AAAA13')
                 ),
                 'title' => array(
-                    'text'  => 'Irradiation',
+                    'text'  => 'Irradiation (kWh/m²)',
                     'style' => array('color' => '#AAAA13')
                 ),
                 'opposite' => true,
             ),
             array(
                 'labels' => array(
-                    'formatter' => new Expr('function () { return this.value + " " }'),
+                    'formatter' => new Expr('function () { return this.value + "" }'),
                     'style'     => array('color' => '#AA4643')
                 ),
                 'title' => array(
@@ -280,11 +314,11 @@ class DataManagerController extends Controller
         
         $ob = new Highchart();
         $ob->chart->renderTo('linechart'); // The #id of the div where to render the chart
-        $ob->chart->type('column');
+        //$ob->chart->type('column');
         $ob->title->text($site->getSiteName());
         $ob->xAxis->categories($categories);
         $ob->yAxis($yData);
-        $ob->legend->enabled(false);
+        //$ob->legend->enabled(false);
         $formatter = new Expr('function () {
                          var unit = {
                              "Energy Injected": "kWh",

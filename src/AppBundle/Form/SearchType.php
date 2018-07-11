@@ -24,8 +24,12 @@ class SearchType extends AbstractType
                 'multiple'    => false,
                 'expanded' => false
             ))
-            ->add('startDate',  DateType::class)
-            ->add('endDate',    DateType::class)
+            ->add('startDate',  DateType::class, array(
+                'widget' => 'single_text'
+            ))
+            ->add('endDate',    DateType::class, array(
+                'widget' => 'single_text'
+            ))
             ->add('search',     SubmitType::class)
         ;
     }

@@ -12,16 +12,15 @@
     <fieldset>Paramètres</fieldset>
 </div>
 
-<div id="linechart" class="well col-md-10" style="min-width: 400px; height: 400px;"></div>
+<div id="linechart" class="well col-md-10" style="min-width: 400px; height: 480px;"></div>
 
 </section>
 {% endblock %}
 
 {% block javascript %}
     <script src="{{ asset('bundles/tsdatamanager/js/dataManager.js') }}"></script>
-    <script src="{{ asset('bundles/tsdatamanager/js/jquery-1.7.1.min.js') }}"></script>
-    <script src="//code.highcharts.com/4.1.8/highcharts.js"></script>
-    <script src="//code.highcharts.com/4.1.8/modules/exporting.js"></script>
+    <script src="//code.highcharts.com/6.1.1/highcharts.js"></script>
+    <script src="//code.highcharts.com/6.1.3/modules/exporting.js"></script>
     <script type="text/javascript">
         {{ chart(chart) }}
     </script>
