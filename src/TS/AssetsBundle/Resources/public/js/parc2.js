@@ -12,10 +12,10 @@ function SelectSite(obj)
 	elmtt.innerHTML=nomSite;
 	url = "getsite/"+idSite;
 	ajaxGet(url, readData);
-
 }
 
-function request() {
+function request() 
+{
 	var numid = document.getElementById("nomSiteArbre").value;
 	var xhr   = new XMLHttpRequest();
 		
@@ -35,12 +35,18 @@ function request() {
 function readData(oData) {
 	var json=JSON.parse(oData);
 	var html = "";
+	
 	json.listAssets.forEach(function (substation) {
 		html +="<div class=\"parent\">";
 		html += substation.name;
+		substation.inverters.forEach(function (inverter) {
+			html +="<div>";
+			html += inverter;
+			html +="</div>";
+		});
 		html +="</div>";
-	})
-
+	});
+	
 	var oSelect = document.getElementById("architecture");
 	oSelect.innerHTML=html;
 	/*var postes = oData.getElementsByTagName("poste");
