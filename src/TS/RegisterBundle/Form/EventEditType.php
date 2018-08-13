@@ -5,7 +5,6 @@ namespace TS\RegisterBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class EventEditType extends AbstractType
 {
@@ -14,7 +13,8 @@ class EventEditType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->remove('site');
+        $builder->remove('site')
+        ;
     }
 
     public function getParent()

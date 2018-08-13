@@ -35,9 +35,9 @@ class Substation
     private $site;
 
     /**
-     * @ORM\OneToMany(targetEntity="TS\AssetsBundle\Entity\Inverter", mappedBy="substation")
+     * @ORM\OneToMany(targetEntity="TS\AssetsBundle\Entity\Equipment", mappedBy="substation")
      */
-    private $inverters;
+    private $equipments;
 
     /**
      * Get id.
@@ -105,40 +105,44 @@ class Substation
     }
 
     /**
-     * Add inverter.
+     * Add equipment.
      *
-     * @param \TS\AssetsBundle\Entity\Inverter $inverter
+     * @param \TS\AssetsBundle\Entity\Equipment $equipment
      *
      * @return Substation
      */
-    public function addInverter(\TS\AssetsBundle\Entity\Inverter $inverter)
+    public function addEquipment(\TS\AssetsBundle\Entity\Equipment $equipment)
     {
-        $this->inverters[] = $inverter;
+        $this->equipments[] = $equipment;
 
-        $inverter->setSubstation($this);
+        $equipment->setSubstation($this);
 
         return $this;
     }
 
     /**
-     * Remove inverter.
+     * Remove equipment.
      *
-     * @param \TS\AssetsBundle\Entity\Inverter $inverter
+     * @param \TS\AssetsBundle\Entity\Equipment $equipment
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeInverter(\TS\AssetsBundle\Entity\Inverter $inverter)
+    public function removeEquipment(\TS\AssetsBundle\Entity\Equipment $equipment)
     {
-        return $this->inverters->removeElement($inverter);
+        return $this->equipments->removeElement($equipment);
     }
 
     /**
-     * Get inverters.
+     * Get equipments.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getInverters()
+    public function getEquipments()
     {
-        return $this->inverters;
+        return $this->equipments;
+    }
+
+    public function __toString() {
+        return $this->getName();
     }
 }

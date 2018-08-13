@@ -1,4 +1,4 @@
 services:
-#    ts_register.example:
-#        class: TS\RegisterBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    TS\RegisterBundle\Form\EventoType:
+        arguments: ['@TS\AssetsBundle\Form\DataTransformer\NumberToSubstationTransformer']
+        tags: [form.type]

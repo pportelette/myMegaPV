@@ -89,3 +89,39 @@ function inputForm(data) {
 	oSelect.innerHTML=data;
 }
 
+document.getElementById("ts_registerbundle_event_site").addEventListener("change", function (e) {
+	url = "listsubstations/"+e.target.value;
+	ajaxGet(url, listSubstations);
+});
+
+function listSubstations(data) {
+	var select = document.getElementById("ts_registerbundle_event_substation");
+	var json=JSON.parse(data);
+	var html = "<option></option>";
+	
+	json.substations.forEach(function (substation) {
+		html +="<option value=\""+substation.id+"\">";
+		html += substation.name;
+		html +="</option>";
+	});
+
+	select.innerHTML = html;
+}
+document.getElementById("ts_registerbundle_event_substation").addEventListener("change", function (e) {
+	url = "listequipments/"+e.target.value;
+	ajaxGet(url, listequipments);
+});
+
+function listequipments(data) {
+	var select = document.getElementById("ts_registerbundle_event_equipment");
+	var json=JSON.parse(data);
+	var html = "<option></option>";
+	
+	json.equipment.forEach(function (equipment) {
+		html +="<option value=\""+equipment.id+"\">";
+		html += equipment.name;
+		html +="</option>";
+	});
+
+	select.innerHTML = html;
+}

@@ -56,18 +56,16 @@ class Event
     private $consequence;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="substation", type="string", length=20, nullable=true)
+     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Substation")
+     * @ORM\JoinColumn(nullable= false)
      */
     private $substation;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="equipement", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Equipment")
+     * @ORM\JoinColumn(nullable= false)
      */
-    private $equipement;
+    private $equipment;
 
     /**
      * @var float
@@ -181,7 +179,7 @@ class Event
     /**
      * Set substation
      *
-     * @param string $substation
+     * @param \TS\AssetsBundle\Entity\Substation $substation
      *
      * @return Event
      */
@@ -195,7 +193,7 @@ class Event
     /**
      * Get substation
      *
-     * @return string
+     * @return \TS\AssetsBundle\Entity\Substation
      */
     public function getSubstation()
     {
@@ -203,27 +201,27 @@ class Event
     }
 
     /**
-     * Set equipement
+     * Set equipment
      *
-     * @param string $equipement
+     * @param \TS\AssetsBundle\Entity\Equipment $equipment
      *
      * @return Event
      */
-    public function setEquipement($equipement)
+    public function setEquipment($equipment)
     {
-        $this->equipement = $equipement;
+        $this->equipment = $equipment;
 
         return $this;
     }
 
     /**
-     * Get equipement
+     * Get equipment
      *
-     * @return string
+     * @return \TS\AssetsBundle\Entity\Equipment
      */
-    public function getEquipement()
+    public function getEquipment()
     {
-        return $this->equipement;
+        return $this->equipment;
     }
 
     /**

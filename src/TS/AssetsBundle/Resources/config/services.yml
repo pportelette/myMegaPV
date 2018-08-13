@@ -1,4 +1,8 @@
 services:
-#    ts_assets.example:
-#        class: TS\AssetsBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    TS\AssetsBundle\Form\SubstationSelectorType:
+        arguments: ['@TS\AssetsBundle\Form\DataTransformer\NumberToSubstationTransformer']
+        tags: [form.type]
+
+    TS\AssetsBundle\Form\DataTransformer\NumberToSubstationTransformer:
+        arguments: ['@doctrine.orm.entity_manager']
+        tags: [form.type]

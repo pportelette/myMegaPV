@@ -17,4 +17,10 @@ class SubstationRepository extends \Doctrine\ORM\EntityRepository
                 ->getQuery()
                 ->getArrayResult();
     }
+
+    public function getQuerySubstations($id) {
+        return $this->createQueryBuilder('p')
+                    ->where('p.site = :site')
+                    ->setParameter('site', $id);
+    }
 }

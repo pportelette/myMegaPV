@@ -17,26 +17,25 @@ class RegisterController extends Controller{
 	public function registerAction(Request $request){
 		
 		$em = $this->getDoctrine()->getManager();
-
+		$session = $request->getSession();
 		$listSites = $em->getRepository('TSAssetsBundle:Site')->findAll();
 
 		$search = new search();
 		$formSearch = $this->get('form.factory')->create(SearchType::class, $search);
-				
+		
 		$event = new Event();
 		$formNewEvent = $this->createForm(EventType::class, $event);
 
 		if($request->isMethod('POST')) {
 			if ($request->request->has('appbundle_search') && $formSearch->handleRequest($request)->isValid()) {
-				$repository = $this
-					->getDoctrine()
-					->getManager()
-					->getRepository('TSRegisterBundle:Event')
-				;
+				$session->set('search', $search);
+				$repository = $em->getRepository('TSRegisterBundle:Event');
+				
 				$startDate = $search->getStartDate();
 				$endDate = $search->getEndDate();
-				$listSites = $startDate;
+				
 				$listEvents = $repository->getSelectedEvents($startDate, $endDate);
+				$session->set('listEvents', $listEvents);
 				
 				return $this->render('@TSRegister/Register/register.html.twig', array(
 					'listSites' => $listSites, 
@@ -54,6 +53,7 @@ class RegisterController extends Controller{
 		}
 
 		$listEvents = $em->getRepository('TSRegisterBundle:Event')->findAll();
+		$session->set('listEvents', $listEvents);
 
 		return $this->render('@TSRegister/Register/register.html.twig', array(
 			'listSites' => $listSites, 
@@ -64,9 +64,10 @@ class RegisterController extends Controller{
     }
 	
 	public function editEventAction (Request $request, $id) {
-		$eventEdited = new Event();
-		$em = $this->getDoctrine()->getManager();
-		$eventEdited = $em->getRepository('TSRegisterBundle:Event')->find($id);
+		$session=$request->getSession();
+		$listEvents=$session->get('listEvents');
+		$searchService = $this->container->get('app.search');
+		$eventEdited = $searchService->searchInListById($listEvents, $id);
 		$formEditEvent = $this->createForm(EventEditType::class, $eventEdited, array(
 			'action' => $this->generateUrl('ts_register_editevent', array('id'=>$id,'Request'=>$request))));
 		
@@ -84,13 +85,35 @@ class RegisterController extends Controller{
 	}
 
 	public function removeEventAction (Request $request, $id) {
-		$event = new Event();
-		$em = $this->getDoctrine()->getManager();
-		$event = $em->getRepository('TSRegisterBundle:Event')->find($id);
+		$session=$request->getSession();
+		$listEvents=$session->get('listEvents');
+		$searchService = $this->container->get('app.search');
+		$eventEdited = $searchService->searchInListById($listEvents, $id);
 		
 		$em->remove($event);
 		$em->flush();
 
 		return $this->redirectToRoute('ts_register_homepage');
+	}
+
+	public function listSubstationsAction ($id) {
+		$em = $this->getDoctrine()->getManager();
+		$repository = $em->getRepository('TSAssetsBundle:Substation');
+		$substations=$repository->getSubstations($id);
+		$json = json_encode(array('substations' => $substations));
+		$response = new Response();
+		$response->headers->set('content-Type', 'application/json');
+		$response->setContent($json);
+		return $response;
+	}
+	public function listEquipmentsAction ($id) {
+		$em = $this->getDoctrine()->getManager();
+		$repository = $em->getRepository('TSAssetsBundle:Equipment');
+		$equipments=$repository->getEquipments($id);
+		$json = json_encode(array('equipment' => $equipments));
+		$response = new Response();
+		$response->headers->set('content-Type', 'application/json');
+		$response->setContent($json);
+		return $response;
 	}
 }
