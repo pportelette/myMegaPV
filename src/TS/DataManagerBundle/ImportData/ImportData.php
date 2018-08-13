@@ -28,7 +28,7 @@ class ImportData
         for ($row = 3; $row <= $highestRow; ++$row) {
             $datestr = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
             $date = mktime(0,0,0,1,$datestr-1,1900);
-            $energyInjected = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+            $energyInjected = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
             $irradiation = $worksheet->getCellByColumnAndRow(10, $row)->getCalculatedValue();
             $importRaw = array('id' => $row, 'date' => $date, 'energy' => $energyInjected, 'irradiation' => $irradiation);
             $tableau[] = $importRaw;

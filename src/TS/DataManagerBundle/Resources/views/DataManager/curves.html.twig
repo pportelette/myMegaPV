@@ -8,20 +8,68 @@
 <section id="container">
 {{ include("@App/App/search.html.twig") }}
 
-<div id="parameters" class="well col-md-2">
-    <fieldset>Paramètres</fieldset>
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#curveDiv" aria-controls="curveDiv" role="tab" data-toggle="tab">Graphique</a></li>
+    <li role="presentation"><a href="#statDiv" aria-controls="statDiv" role="tab" data-toggle="tab">Statistiques</a></li>
+</ul>
+<div class="tab-content">
+<div id="parameters" class="well col-md-2" style="display: none">
+    <form>Paramètres
+        <div style="display: flex">
+            <div class="onoffswitch">
+                <input type="checkbox" name="onoffswitch1" class="onoffswitch-checkbox" id="myonoffswitch1" checked>
+                <label class="onoffswitch-label" for="myonoffswitch1">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                </label>
+            </div>
+            <div>Energy</div>
+        </div>
+        <div style="display: flex">
+            <div class="onoffswitch">
+                <input type="checkbox" name="onoffswitch2" class="onoffswitch-checkbox" id="myonoffswitch2" checked>
+                <label class="onoffswitch-label" for="myonoffswitch2">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                </label>
+            </div>
+            </Br>
+            <div>Irradiance</div>
+        </div>
+        <div style="display: flex">
+            <div class="onoffswitch">
+                <input type="checkbox" name="onoffswitch3" class="onoffswitch-checkbox" id="myonoffswitch3" checked>
+                <label class="onoffswitch-label" for="myonoffswitch3">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                </label>
+            </div>
+            <div>RP</div>
+        </div>
+    </form>
+
 </div>
 
-<div id="linechart" class="well col-md-10" style="min-width: 400px; height: 480px;"></div>
+<div id="curveDiv" role="tabpanel" class="tab-pane active">
+    {{ include("@TSDataManager/DataManager/curveDiv.html.twig") }}
+</div>
 
+<div id="generalInfo" class="well col-md-2">
+    <h4>Données cumulées sur la période</h4>
+    <p>Energie : <strong>{{ energyPeriod|number_format(0, ',', ' ') }} kWh</strong></p>
+    <p>Irradiance : <strong>{{ irradiationPeriod|number_format(0, ',', ' ') }} Wh/m²</strong></p>
+    <p>PR : <strong>{{ PRPeriod|number_format(2, ',', ' ') }} %</strong></p>
+</div>
+
+<div id="statDiv" role="tabpanel" class="well tab-pane">
+blabla
+</div>
+</div>
 </section>
 {% endblock %}
 
 {% block javascript %}
     <script src="{{ asset('bundles/tsdatamanager/js/dataManager.js') }}"></script>
-    <script src="//code.highcharts.com/6.1.1/highcharts.js"></script>
-    <script src="//code.highcharts.com/6.1.3/modules/exporting.js"></script>
-    <script type="text/javascript">
-        {{ chart(chart) }}
-    </script>
+    <script src="{{ asset('bundles/tsdatamanager/js/curves.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 {% endblock %}

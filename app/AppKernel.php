@@ -22,6 +22,8 @@ class AppKernel extends Kernel
             new TS\DataManagerBundle\TSDataManagerBundle(),
             new Yectep\PhpSpreadsheetBundle\PhpSpreadsheetBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
+            new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle(),
+            new TS\ReportsBundle\TSReportsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

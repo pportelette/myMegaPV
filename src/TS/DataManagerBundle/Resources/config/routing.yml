@@ -12,12 +12,16 @@ ts_register_removerow:
 
 ts_data_manager_save:
     path:     /save
-    defaults: { _controller: TSDataManagerBundle:DataManager:Save }
+    defaults: { _controller: TSDataManagerBundle:Import:Save }
 
 ts_data_manager_import:
     path:     /import
-    defaults: { _controller: TSDataManagerBundle:DataManager:Import }
+    defaults: { _controller: TSDataManagerBundle:Import:Import }
 
 ts_data_manager_curves:
     path:     /curves
-    defaults: { _controller: TSDataManagerBundle:DataManager:Curves }
+    defaults: { _controller: TSDataManagerBundle:Curves:Curves }
+
+ts_data_manager_trend:
+    path:     /curves/trend/{e}/{i}/{p}
+    defaults: { _controller: TSDataManagerBundle:Curves:trend, e: 1 }
