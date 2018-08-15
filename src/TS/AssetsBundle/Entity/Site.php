@@ -28,9 +28,9 @@ class Site
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="TS\DataManagerBundle\Entity\ImportDataRaw", mappedBy="site")
+     * @ORM\OneToMany(targetEntity="TS\DataManagerBundle\Entity\ImportDataRow", mappedBy="site")
      */
-    private $importDataRaws;
+    private $importDataRows;
 
     /**
      * @var string
@@ -150,40 +150,44 @@ class Site
     }
 
     /**
-     * Add importDataRaw.
+     * Add importDataRow.
      *
-     * @param \TS\DataManagerBundle\Entity\ImportDataRaw $importDataRaw
+     * @param \TS\DataManagerBundle\Entity\ImportDataRow $importDataRow
      *
      * @return Site
      */
-    public function addImportDataRaw(\TS\DataManagerBundle\Entity\ImportDataRaw $importDataRaw)
+    public function addImportDataRow(\TS\DataManagerBundle\Entity\ImportDataRow $importDataRow)
     {
-        $this->importDataRaws[] = $importDataRaw;
+        $this->importDataRows[] = $importDataRow;
 
-        $importDataRaw->setSite($this);
+        $importDataRow->setSite($this);
 
         return $this;
     }
 
     /**
-     * Remove importDataRaw.
+     * Remove importDataRow.
      *
-     * @param \TS\DataManagerBundle\Entity\ImportDataRaw $importDataRaw
+     * @param \TS\DataManagerBundle\Entity\ImportDataRow $importDataRow
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeImportDataRaw(\TS\DataManagerBundle\Entity\ImportDataRaw $importDataRaw)
+    public function removeImportDataRow(\TS\DataManagerBundle\Entity\ImportDataRow $importDataRow)
     {
-        return $this->importDataRaws->removeElement($importDataRaw);
+        return $this->importDataRows->removeElement($importDataRow);
     }
 
     /**
-     * Get importDataRaws.
+     * Get importDataRows.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getImportDataRaws()
+    public function getImportDataRows()
     {
-        return $this->importDataRaws;
+        return $this->importDataRows;
+    }
+
+    public function __toString() {
+        return $this->getSiteName();
     }
 }

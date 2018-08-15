@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Search;
 use AppBundle\Form\SearchType;
 use TS\AssetsBundle\Entity\Site;
-use TS\DataManagerBundle\Entity\ImportDataRaw;
-use TS\DataManagerBundle\Form\ImportDataRawEditType;
+use TS\DataManagerBundle\Entity\ImportDataRow;
+use TS\DataManagerBundle\Form\ImportDataRowEditType;
 
 class DataManagerController extends Controller
 {
@@ -27,7 +27,7 @@ class DataManagerController extends Controller
             $repository = $this
                 ->getDoctrine()
                 ->getManager()
-                ->getRepository('TSDataManagerBundle:ImportDataRaw')
+                ->getRepository('TSDataManagerBundle:ImportDataRow')
             ;
             $startDate = $search->getStartDate();
             $endDate = $search->getEndDate();
@@ -53,10 +53,10 @@ class DataManagerController extends Controller
     }
 
     public function editRowAction (Request $request, $id) {
-		$rowEdited = new ImportDataRaw();
+		$rowEdited = new ImportDataRow();
 		$em = $this->getDoctrine()->getManager();
-		$rowEdited = $em->getRepository('TSDataManagerBundle:ImportDataRaw')->find($id);
-		$formEditRow = $this->createForm(ImportDataRawEditType::class, $rowEdited, array(
+		$rowEdited = $em->getRepository('TSDataManagerBundle:ImportDataRow')->find($id);
+		$formEditRow = $this->createForm(ImportDataRowEditType::class, $rowEdited, array(
 			'action' => $this->generateUrl('ts_data_manager_editrow', array(
                 'id'=>$id,
                 'Request'=>$request)
@@ -75,9 +75,9 @@ class DataManagerController extends Controller
 	}
 
 	public function removeRowAction (Request $request, $id) {
-		$row = new ImportDataRaw();
+		$row = new ImportDataRow();
 		$em = $this->getDoctrine()->getManager();
-		$row = $em->getRepository('TSDataManagerBundle:ImportDataRaw')->find($id);
+		$row = $em->getRepository('TSDataManagerBundle:ImportDataRow')->find($id);
 		
 		$em->remove($row);
 		$em->flush();

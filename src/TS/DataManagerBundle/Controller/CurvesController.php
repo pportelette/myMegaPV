@@ -18,8 +18,10 @@ class CurvesController extends Controller
     public function curvesAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $session = $request->getSession();
-        $ob = new Highchart();
+        $session = $request->getSession();
         $search = new search();
+        $ob = new Highchart();
+        
         $formSearch = $this->get('form.factory')->create(SearchType::class, $search);
         $energyPeriod = 0;
         $irradiationPeriod = 1;
@@ -29,7 +31,7 @@ class CurvesController extends Controller
             $repository = $this
                 ->getDoctrine()
                 ->getManager()
-                ->getRepository('TSDataManagerBundle:ImportDataRaw')
+                ->getRepository('TSDataManagerBundle:ImportDataRow')
             ;
             $site = $search->getSite();
             $session->set('search', $search);

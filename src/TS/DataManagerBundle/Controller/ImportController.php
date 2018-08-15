@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use TS\DataManagerBundle\Form\UploadFileType;
 use TS\DataManagerBundle\Entity\File;
-use TS\DataManagerBundle\Entity\ImportDataRaw;
+use TS\DataManagerBundle\Entity\ImportDataRow;
 
 class ImportController extends Controller
 {
@@ -44,28 +44,28 @@ class ImportController extends Controller
         //ligne provisoire
         $site = $em->getRepository('TSAssetsBundle:Site')->find(1);
         
-        foreach ($table as $raw) {
-            $dataRaw = new importDataRaw();
-            foreach ($raw as $key => $cell){
+        foreach ($table as $row) {
+            $dataRow = new importDataRow();
+            foreach ($row as $key => $cell){
                 switch ($key){
                     case 'date':
                         $format = str_replace("/", "-", $cell);
                         $days = strtotime($format);
                         $date = date('Y-m-d', $days);
                         $dateO = \DateTime::createFromFormat('Y-m-d', $date);
-                        $dataRaw->setDate($dateO);
+                        $dataRow->setDate($dateO);
                     break;
                     case 'energy':
-                        $dataRaw->setEnergyInjected($cell+0);
+                        $dataRow->setEnergyInjected($cell+0);
                     break;
                     case 'irradiation':
-                        $dataRaw->setIrradiation($cell+0);
+                        $dataRow->setIrradiation($cell+0);
                     break;
                     default :
                 }
             }
-            $dataRaw->setSite($site);
-            $em->persist($dataRaw);
+            $dataRow->setSite($site);
+            $em->persist($dataRow);
         }
         $em->flush();
 

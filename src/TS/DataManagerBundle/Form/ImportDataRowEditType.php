@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class ImportDataRawEditType extends AbstractType
+class ImportDataRowEditType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -19,6 +19,6 @@ class ImportDataRawEditType extends AbstractType
 
     public function getParent()
     {
-        return ImportDataRawType::class;
+        return ImportDataRowType::class;
     }
 }

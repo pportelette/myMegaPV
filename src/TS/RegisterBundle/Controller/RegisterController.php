@@ -24,7 +24,7 @@ class RegisterController extends Controller{
 		$formSearch = $this->get('form.factory')->create(SearchType::class, $search);
 		
 		$event = new Event();
-		$formNewEvent = $this->createForm(EventType::class, $event);
+		$formNewEvent = $this->createForm(EventType::class, $event, array('em' => $em));
 
 		if($request->isMethod('POST')) {
 			if ($request->request->has('appbundle_search') && $formSearch->handleRequest($request)->isValid()) {
@@ -64,11 +64,13 @@ class RegisterController extends Controller{
     }
 	
 	public function editEventAction (Request $request, $id) {
+		$em = $this->getDoctrine()->getManager();
 		$session=$request->getSession();
 		$listEvents=$session->get('listEvents');
 		$searchService = $this->container->get('app.search');
 		$eventEdited = $searchService->searchInListById($listEvents, $id);
-		$formEditEvent = $this->createForm(EventEditType::class, $eventEdited, array(
+		$formEditEvent = $this->createForm(EventType::class, $eventEdited, array(
+			'em' => $em,
 			'action' => $this->generateUrl('ts_register_editevent', array('id'=>$id,'Request'=>$request))));
 		
 		if($request->isMethod('POST') && $formEditEvent->handleRequest($request)->isValid()) {

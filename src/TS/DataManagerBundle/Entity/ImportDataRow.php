@@ -5,12 +5,12 @@ namespace TS\DataManagerBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ImportDataRaw
+ * ImportDataRow
  *
- * @ORM\Table(name="import_data_raw")
- * @ORM\Entity(repositoryClass="TS\DataManagerBundle\Repository\ImportDataRawRepository")
+ * @ORM\Table(name="import_data_row")
+ * @ORM\Entity(repositoryClass="TS\DataManagerBundle\Repository\ImportDataRowRepository")
  */
-class ImportDataRaw
+class ImportDataRow
 {
     /**
      * @var int
@@ -22,7 +22,7 @@ class ImportDataRaw
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Site", inversedBy="importDataRaws")
+     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Site", inversedBy="importDataRows")
      * @ORM\JoinColumn(nullable=false)
      */
     private $site;
@@ -67,7 +67,7 @@ class ImportDataRaw
      *
      * @param \DateTime $date
      *
-     * @return ImportDataRaw
+     * @return ImportDataRow
      */
     public function setDate($date)
     {
@@ -91,7 +91,7 @@ class ImportDataRaw
      *
      * @param float $energyInjected
      *
-     * @return ImportDataRaw
+     * @return ImportDataRow
      */
     public function setEnergyInjected($energyInjected)
     {
@@ -115,7 +115,7 @@ class ImportDataRaw
      *
      * @param float $irradiation
      *
-     * @return ImportDataRaw
+     * @return ImportDataRow
      */
     public function setIrradiation($irradiation)
     {
@@ -139,7 +139,7 @@ class ImportDataRaw
      *
      * @param \TS\AssetsBundle\Entity\Site $site
      *
-     * @return ImportDataRaw
+     * @return ImportDataRow
      */
     public function setSite(\TS\AssetsBundle\Entity\Site $site)
     {
