@@ -73,4 +73,5 @@ class Inverter extends Equipment
     {
         return $this->power;
     }
+
 }

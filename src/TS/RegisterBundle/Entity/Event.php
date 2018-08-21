@@ -36,7 +36,7 @@ class Event
     private $endDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Site")
+     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Site", cascade={"persist"})
      * @ORM\JoinColumn(nullable= false)
      */
     private $site;
@@ -56,13 +56,13 @@ class Event
     private $consequence;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Substation")
+     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Substation", cascade={"persist"})
      * @ORM\JoinColumn(nullable= false)
      */
     private $substation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Equipment")
+     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Equipment", cascade={"persist"})
      * @ORM\JoinColumn(nullable= false)
      */
     private $equipment;

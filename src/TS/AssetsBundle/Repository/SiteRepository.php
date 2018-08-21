@@ -10,4 +10,7 @@ namespace TS\AssetsBundle\Repository;
  */
 class SiteRepository extends \Doctrine\ORM\EntityRepository
 {
+    function myFindAll() {
+        return $this->createQueryBuilder('a');
+    }
 }

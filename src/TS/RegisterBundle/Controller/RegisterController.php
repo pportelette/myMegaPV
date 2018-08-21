@@ -24,7 +24,7 @@ class RegisterController extends Controller{
 		$formSearch = $this->get('form.factory')->create(SearchType::class, $search);
 		
 		$event = new Event();
-		$formNewEvent = $this->createForm(EventType::class, $event, array('em' => $em));
+		$formNewEvent = $this->createForm(EventType::class, $event);
 
 		if($request->isMethod('POST')) {
 			if ($request->request->has('appbundle_search') && $formSearch->handleRequest($request)->isValid()) {
@@ -50,6 +50,7 @@ class RegisterController extends Controller{
 
 				return $this->redirectToRoute('ts_register_homepage');
 			}
+
 		}
 
 		$listEvents = $em->getRepository('TSRegisterBundle:Event')->findAll();
@@ -68,8 +69,10 @@ class RegisterController extends Controller{
 		$session=$request->getSession();
 		$listEvents=$session->get('listEvents');
 		$searchService = $this->container->get('app.search');
-		$eventEdited = $searchService->searchInListById($listEvents, $id);
-		$formEditEvent = $this->createForm(EventType::class, $eventEdited, array(
+		$eventFound = $searchService->searchInListById($listEvents, $id);
+		$eventEdited = $em->merge($eventFound);
+
+		$formEditEvent = $this->createForm(EventEditType::class, $eventEdited, array(
 			'em' => $em,
 			'action' => $this->generateUrl('ts_register_editevent', array('id'=>$id,'Request'=>$request))));
 		
@@ -87,12 +90,13 @@ class RegisterController extends Controller{
 	}
 
 	public function removeEventAction (Request $request, $id) {
+		$em = $this->getDoctrine()->getManager();
 		$session=$request->getSession();
 		$listEvents=$session->get('listEvents');
 		$searchService = $this->container->get('app.search');
-		$eventEdited = $searchService->searchInListById($listEvents, $id);
+		$event = $searchService->searchInListById($listEvents, $id);
 		
-		$em->remove($event);
+		$em->remove($em->merge($event));
 		$em->flush();
 
 		return $this->redirectToRoute('ts_register_homepage');

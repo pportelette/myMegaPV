@@ -17,4 +17,10 @@ class InverterRepository extends \Doctrine\ORM\EntityRepository
                 ->getQuery()
                 ->getArrayResult();
     }
+
+    public function getQueryInverters($id) {
+        return $this->createQueryBuilder('p')
+                    ->where('p.substation = :substation')
+                    ->setParameter('substation', $id);
+    }
 }

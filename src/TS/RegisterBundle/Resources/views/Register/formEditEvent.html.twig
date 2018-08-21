@@ -4,14 +4,15 @@
 
     {{ form_row(formEditEvent.startDate) }}
     {{ form_row(formEditEvent.endDate) }}
-    {{ form_row(formEditEvent.site) }}
-    {{ form_row(formEditEvent.substation) }}
-    {{ form_row(formEditEvent.equipment) }}
+    {{ form_row(formEditEvent.site, {'id': 'editSiteInput', 'attr': {'disabled': 'disabled'}}) }}
+    {{ form_row(formEditEvent.substation, {'id': 'editSubstationInput', 'attr': {'disabled': 'disabled'}}) }}
+    {{ form_row(formEditEvent.equipment, {'id': 'editEquipmentInput'}) }}
     {{ form_row(formEditEvent.origin) }}
     {{ form_row(formEditEvent.consequence) }}
     {{ form_row(formEditEvent.ensOperator) }}
     {{ form_row(formEditEvent.ensOther) }}
     {{ form_row(formEditEvent.coment) }}
+
 </div>
 <div class="modal-footer">
     {{ form_widget(formEditEvent.Enregistrer, {'attr': {'class': 'btn btn-info'}}) }}
@@ -21,3 +22,28 @@
 {{ form_rest(formEditEvent) }}
 
 {{ form_end(formEditEvent) }}
+
+{% block javascript %}
+<script type="text/javascript">
+console.log("coucou1");
+document.getElementById("editSubstationInput").addEventListener("change", function (e) {
+	url = "listequipments/"+e.target.value;
+    console.log("coucou");
+	ajaxGet(url, listequipmentss);
+});
+
+function listequipmentss(data) {
+	var select = document.getElementById("editEquipmentInput");
+	var json=JSON.parse(data);
+	var html = "<option></option>";
+	
+	json.equipment.forEach(function (equipment) {
+		html +="<option value=\""+equipment.id+"\">";
+		html += equipment.name;
+		html +="</option>";
+	});
+
+	select.innerHTML = html;
+}
+</script>
+{% endblock %}
