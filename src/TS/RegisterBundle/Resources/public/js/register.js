@@ -87,6 +87,24 @@ function editChoice() {
 function inputForm(data) {
 	var oSelect = document.getElementById("editForm");
 	oSelect.innerHTML=data;
+	document.getElementById("editSubstationInput").addEventListener("change", function (e) {
+		url = "listequipments/"+e.target.value;
+		console.log("coucou");
+		ajaxGet(url, listequipments);
+	});
+	function listequipments(data) {
+		var select = document.getElementById("editEquipmentInput");
+		var json=JSON.parse(data);
+		var html = "<option></option>";
+		
+		json.equipment.forEach(function (equipment) {
+			html +="<option value=\""+equipment.id+"\">";
+			html += equipment.name;
+			html +="</option>";
+		});
+	
+		select.innerHTML = html;
+	}
 }
 
 document.getElementById("ts_registerbundle_event_site").addEventListener("change", function (e) {
@@ -125,3 +143,5 @@ function listequipments(data) {
 
 	select.innerHTML = html;
 }
+
+

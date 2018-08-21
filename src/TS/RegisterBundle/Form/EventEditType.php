@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -53,19 +54,13 @@ class EventEditType extends AbstractType
 
                 $equipmentClass = get_class($equipment);
                 $form
-                    ->add('site',     EntityType::class, array(
-                        'class'         =>  'TSAssetsBundle:Site',
-                        'placeholder'   =>  ' ',
+                    ->add('site',     ChoiceType::class, array(
+                        'choices'       =>  [$em->getReference("TSAssetsBundle:Site", $siteId)],
                         'choice_label'  =>  'siteName',
-                        'data'          =>  $em->getReference("TSAssetsBundle:Site", $siteId)
                     ))
-                    ->add('substation', EntityType::class, array(
-                        'class'         => 'TSAssetsBundle:Substation',
-                        'placeholder'   => ' ',
-                        'query_builder' => function (SubstationRepository $repository) use ($siteId) {
-                            return $repository->getQuerySubstations($siteId);
-                        },
-                        'data'          => $em->getReference("TSAssetsBundle:Substation", $subId)
+                    ->add('substation', ChoiceType::class, array(
+                        'choices'         => [$em->getReference("TSAssetsBundle:Substation", $subId)],
+                        'choice_label'  =>  'name',
                     ))
                     ->add('equipment', EntityType::class, array(
                         'class'         => 'TSAssetsBundle:Equipment',

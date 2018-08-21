@@ -4,8 +4,8 @@
 
     {{ form_row(formEditEvent.startDate) }}
     {{ form_row(formEditEvent.endDate) }}
-    {{ form_row(formEditEvent.site, {'id': 'editSiteInput', 'attr': {'disabled': 'disabled'}}) }}
-    {{ form_row(formEditEvent.substation, {'id': 'editSubstationInput', 'attr': {'disabled': 'disabled'}}) }}
+    {{ form_row(formEditEvent.site, {'id': 'editSiteInput'}) }}
+    {{ form_row(formEditEvent.substation, {'id': 'editSubstationInput'}) }}
     {{ form_row(formEditEvent.equipment, {'id': 'editEquipmentInput'}) }}
     {{ form_row(formEditEvent.origin) }}
     {{ form_row(formEditEvent.consequence) }}
@@ -23,27 +23,3 @@
 
 {{ form_end(formEditEvent) }}
 
-{% block javascript %}
-<script type="text/javascript">
-console.log("coucou1");
-document.getElementById("editSubstationInput").addEventListener("change", function (e) {
-	url = "listequipments/"+e.target.value;
-    console.log("coucou");
-	ajaxGet(url, listequipmentss);
-});
-
-function listequipmentss(data) {
-	var select = document.getElementById("editEquipmentInput");
-	var json=JSON.parse(data);
-	var html = "<option></option>";
-	
-	json.equipment.forEach(function (equipment) {
-		html +="<option value=\""+equipment.id+"\">";
-		html += equipment.name;
-		html +="</option>";
-	});
-
-	select.innerHTML = html;
-}
-</script>
-{% endblock %}
