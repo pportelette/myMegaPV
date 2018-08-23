@@ -10,6 +10,7 @@ use AppBundle\Form\SearchType;
 use TS\AssetsBundle\Entity\Site;
 use TS\DataManagerBundle\Curves\EnergyInjectedSerie;
 use TS\DataManagerBundle\Curves\IrradiationSerie;
+use TS\DataManagerBundle\Curves\ENSSerie;
 use TS\DataManagerBundle\Curves\PRSerie;
 use Ob\HighchartsBundle\Highcharts\Highchart;
 
@@ -26,6 +27,7 @@ class CurvesController extends Controller
         $energyPeriod = 0;
         $irradiationPeriod = 1;
         $PRPeriod = 0;
+        $ensPeriod = 0;
         
         if ($request->isMethod('POST') && $formSearch->handleRequest($request)->isValid()) {
             $repository = $this
@@ -41,23 +43,33 @@ class CurvesController extends Controller
                 $energyRow = $row->getEnergyInjected();
                 $irradiationRow=$row->getIrradiation()*277.77;
                 $powerPeak = $site->getPowerPeak();
+                $ensRow = $row->getEns();
+                $ens[] = $ensRow;
+                $ensPeriod += $ensRow;
                 $dates[]=$row->getDate()->format('d/m/Y');
                 $energyPeriod += $energyRow;
                 $energies[]=$energyRow;
                 $irradiationPeriod += $irradiationRow;
                 $irradiations[]=$irradiationRow;
-                $PRPeriod = $energyPeriod * 100000 / ($irradiationPeriod * $powerPeak);
-                $pr[] = $energyRow * 100000 / ($irradiationRow * $powerPeak);
+                $PRPeriod = ($energyPeriod + $ensPeriod) * 100000 / ($irradiationPeriod * $powerPeak);
+                $pr[] = ($energyRow + $ensRow) * 100000 / ($irradiationRow * $powerPeak);
             }
             $session->set('dates', $dates);
 
+            $serie4 = new ENSSerie();
+            $serie4->setSerie($ens);
+            $serie4->setName('ENS');
+            $serie4->setOpposite(false);
+            $session->set('serie4', $serie4);
+            $series[]=$serie4;
+            
             $serie1 = new EnergyInjectedSerie();
             $serie1->setSerie($energies);
             $serie1->setName('Energy Injected');
             $serie1->setOpposite(false);
             $session->set('serie1', $serie1);
             $series[]=$serie1;
-
+            
             $serie2 = new IrradiationSerie();
             $serie2->setSerie($irradiations);
             $serie2->setName('Irradiation');
@@ -80,6 +92,7 @@ class CurvesController extends Controller
                 'energyPeriod'=>$energyPeriod,
                 'irradiationPeriod'=>$irradiationPeriod,
                 'PRPeriod'=>$PRPeriod,
+                'ensPeriod'=>$ensPeriod,
                 'formSearch'=>$formSearch->createview()
             ));
         }
@@ -89,6 +102,7 @@ class CurvesController extends Controller
             'energyPeriod'=>$energyPeriod,
             'irradiationPeriod'=>$irradiationPeriod,
             'PRPeriod'=>$PRPeriod,
+            'ensPeriod'=>$ensPeriod,
             'formSearch'=>$formSearch->createview()
         ));
     }

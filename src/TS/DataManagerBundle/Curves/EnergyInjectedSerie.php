@@ -10,5 +10,6 @@ class EnergyInjectedSerie extends Serie
     $this->setType('column');
     $this->setColor('#4572A7');
     $this->setUnit('kWh');
+    $this->setStacking('normal');
   }
 }

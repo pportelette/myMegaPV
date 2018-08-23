@@ -48,8 +48,16 @@ class ImportDataRow
      */
     private $irradiation;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ens", type="float")
+     */
+    private $ens;
+
     public function __construct(){
         $this->date = new \DateTime(); 
+        $this->ens = 0; 
     }
 
     /**
@@ -156,5 +164,29 @@ class ImportDataRow
     public function getSite()
     {
         return $this->site;
+    }
+
+    /**
+     * Set ens.
+     *
+     * @param float $ens
+     *
+     * @return ImportDataRow
+     */
+    public function setEns($ens)
+    {
+        $this->ens = $ens;
+
+        return $this;
+    }
+
+    /**
+     * Get ens.
+     *
+     * @return float
+     */
+    public function getEns()
+    {
+        return $this->ens;
     }
 }

@@ -56,9 +56,28 @@
 
 <div id="generalInfo" class="well col-md-2">
     <h4>Données cumulées sur la période</h4>
-    <p>Energie : <strong>{{ energyPeriod|number_format(0, ',', ' ') }} kWh</strong></p>
-    <p>Irradiance : <strong>{{ irradiationPeriod|number_format(0, ',', ' ') }} Wh/m²</strong></p>
-    <p>PR : <strong>{{ PRPeriod|number_format(2, ',', ' ') }} %</strong></p>
+    <table>
+        <tr>
+            <td style="text-align: left">Energie :</td>
+            <td style="text-align: right"><strong>{{ energyPeriod|number_format(0, ',', ' ') }}</strong></td>
+            <td style="text-align: left"><strong>kWh</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align: left">END :</td>
+            <td style="text-align: right"><strong>{{ ensPeriod|number_format(0, ',', ' ') }}</strong></td>
+            <td style="text-align: left"><strong>kWh</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align: left">Irradiance :</td>
+            <td style="text-align: right"><strong>{{ irradiationPeriod|number_format(0, ',', ' ') }}</strong></td>
+            <td style="text-align: left"><strong>Wh/m²</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align: left">PR :</td>
+            <td style="text-align: right"><strong>{{ PRPeriod|number_format(2, ',', ' ') }}</strong></td>
+            <td style="text-align: left"><strong>%</strong></td>
+        </tr>
+    </table>
 </div>
 
 <div id="statDiv" role="tabpanel" class="well tab-pane">

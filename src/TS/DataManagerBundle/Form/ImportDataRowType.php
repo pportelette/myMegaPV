@@ -22,6 +22,7 @@ class ImportDataRowType extends AbstractType
             ->add('date',           DateTimeType::class)
             ->add('energyInjected', NumberType::class)
             ->add('irradiation',    NumberType::class)
+            ->add('ens',            NumberType::class)
             ->add('site',           EntityType::class, array(
                 'class'         =>  'TSAssetsBundle:Site',
                 'choice_label'  =>  'siteName'
@@ -33,7 +34,7 @@ class ImportDataRowType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'TS\DataManagerBundle\Entity\ImportDataRaw'
+            'data_class' => 'TS\DataManagerBundle\Entity\ImportDataRow'
         ));
     }
 
@@ -42,7 +43,7 @@ class ImportDataRowType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'ts_datamanagerbundle_importdataraw';
+        return 'ts_datamanagerbundle_importdatarow';
     }
 
 

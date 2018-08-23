@@ -21,27 +21,54 @@ class TrendCurves
             $type = $serie->getType();
             $color = $serie->getColor();
             $opposite = $serie->getOpposite();
+            $stacking = $serie->getStacking();
             
-            $series [] = array(
-                'name'  => $name,
-                'type'  => $type,
-                'color' => $color,
-                'data'  => $data,
-                'yAxis' => $i
-            );
+            if ($name != 'ENS') {
+                $series [] = array(
+                    'name'  => $name,
+                    'type'  => $type,
+                    'color' => $color,
+                    'data'  => $data,
+                    'yAxis' => $i,
+                    'stacking' => $stacking
+                );
+                $yData[] = array(
+                    'labels' => array(
+                        'formatter' => new Expr('function () { return this.value + " " }'),
+                        'style'     => array('color' => $color)
+                    ),
+                    'gridLineWidth' => 0,
+                    'title' => array(
+                        'text'  => $name,
+                        'style' => array('color' => $color)
+                    ),
+                    'opposite' => $opposite
+                );
+            } else {
+                $series [] = array(
+                    'name'  => $name,
+                    'type'  => $type,
+                    'color' => $color,
+                    'data'  => $data,
+                    'yAxis' => $i+1,
+                    'stacking' => $stacking
+                );
+                $yData[] = array(
+                    'labels' => array(
+                        'formatter' => new Expr('function () { return this.value + " " }'),
+                        'style'     => array('color' => $color)
+                    ),
+                    'gridLineWidth' => 0,
+                    'title' => array(
+                        'text'  => '',
+                        'style' => array('color' => $color)
+                    ),
+                    'opposite' => $opposite
+                );
+            }
+            
             $i++;
-            $yData[] = array(
-                'labels' => array(
-                    'formatter' => new Expr('function () { return this.value + " " }'),
-                    'style'     => array('color' => $color)
-                ),
-                'gridLineWidth' => 0,
-                'title' => array(
-                    'text'  => $name,
-                    'style' => array('color' => $color)
-                ),
-                'opposite' => $opposite
-            );
+
         }
         $categories = $xData;
         

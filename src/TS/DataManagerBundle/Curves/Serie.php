@@ -10,6 +10,7 @@ class Serie
     private $color;
     private $unit;
     private $opposite;
+    private $stacking;
 
     public function setSerie($serie)
     {
@@ -81,5 +82,17 @@ class Serie
     public function getOpposite()
     {
         return $this->opposite;
+    }
+
+    public function setStacking($stacking)
+    {
+        $this->stacking = $stacking;
+
+        return $this;
+    }
+
+    public function getStacking()
+    {
+        return $this->stacking;
     }
 }

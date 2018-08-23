@@ -30,8 +30,8 @@ class ImportData
             $date = mktime(0,0,0,1,$datestr-1,1900);
             $energyInjected = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
             $irradiation = $worksheet->getCellByColumnAndRow(10, $row)->getCalculatedValue();
-            $importRaw = array('id' => $row, 'date' => $date, 'energy' => $energyInjected, 'irradiation' => $irradiation);
-            $tableau[] = $importRaw;
+            $importRow = array('id' => $row, 'date' => $date, 'energy' => $energyInjected, 'irradiation' => $irradiation);
+            $tableau[] = $importRow;
         }
 
         return $tableau;
