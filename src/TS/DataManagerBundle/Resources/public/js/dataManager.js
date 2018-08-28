@@ -25,6 +25,7 @@ function SelectLigne(obj)
 }
 
 function saveImport() {
+	var siteId = document.getElementById('upload_file_site').value;
 	var importData = [];
 	var Line = {
 		init: function (date, energy, irradiation) {
@@ -43,7 +44,7 @@ function saveImport() {
 		importData.push(importLine);
 
 	}
-	url='http://localhost/myMegaPV/web/app_dev.php/datamanager/save';
+	url='http://localhost/myMegaPV/web/app_dev.php/datamanager/save/'+siteId;
 	ajaxPost(url, importData, afficher, true);
 }
 

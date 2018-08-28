@@ -15,11 +15,9 @@ class AssetsController extends Controller{
 	{		
 		$em = $this->getDoctrine()->getManager();
 		$listClients = $em->getRepository('TSAssetsBundle:Client')->findAll();
-		$listSites = $em->getRepository('TSAssetsBundle:Site')->findAll();
 
 		return $this->render('@TSAssets/Assets/assets.html.twig', array(
-			'listClients'=>$listClients,
-			'listSites'=> $listSites			
+			'listClients'=>$listClients		
 		));
 	}
 	

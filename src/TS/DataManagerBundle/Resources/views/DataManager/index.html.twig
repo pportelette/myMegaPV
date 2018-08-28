@@ -22,21 +22,23 @@
     <table id="tableau" class="table table-bordered table-condensed">
         <thead>
 			<tr>
-			   <th width="20%">Date</th>
-			   <th width="20%">Energie injectée (kWh)</th>
-			   <th width="20%">Irradiation (Wh/m²)</th>
-         <th width="20%">ENS (kWh)</th>
-			   <th width="20%">Performance Ratio (%)</th>
+			   <th width="10%">Date</th>
+			   <th width="18%">Energie injectée (kWh)</th>
+			   <th width="18%">Irradiation (Wh/m²)</th>
+         <th width="18%">ENS (kWh)</th>
+         <th width="18%">Disponibilité (%)</th>
+			   <th width="18%">Performance Ratio (%)</th>
 			</tr>
 		</thead>
 		<tbody id="importData">
 			{% for line in tab %}
 			<tr id="{{ line.id }}" class="default line" onclick="SelectLigne(this)">
-			   <td width="20%">{{ line.date|date('d/m/Y') }}</td>
-			   <td width="20%">{{ (line.energyInjected)|number_format(0, ',', ' ') }}</td>
-			   <td width="20%">{{ (line.irradiation * 277.77)|number_format(0, ',', ' ') }}</td>
-         <td width="20%">{{ (line.ens)|number_format(0, ',', ' ') }}</td>
-			   <td width="20%">{{ ((line.energyInjected + line.ens) * 100000 / (line.irradiation * 277.77 * site.powerPeak))|number_format(2, ',', ' ') }}</td>
+			   <td width="10%">{{ line.date|date('d/m/Y') }}</td>
+			   <td width="18%">{{ (line.energyInjected)|number_format(0, ',', ' ') }}</td>
+			   <td width="18%">{{ (line.irradiation)|number_format(0, ',', ' ') }}</td>
+         <td width="18%">{{ (line.ens)|number_format(0, ',', ' ') }}</td>
+         <td width="18%">{{ (line.energyInjected * 100 / (line.energyInjected + line.ens))|number_format(2, ',', ' ') }}</td>
+			   <td width="18%">{{ ((line.energyInjected + line.ens) * 100000 / (line.irradiation * site.powerPeak))|number_format(2, ',', ' ') }}</td>
 			</tr>
 			{% endfor %}
         </tbody>

@@ -31,10 +31,10 @@ class DataManagerController extends Controller
             ;
             $startDate = $search->getStartDate();
             $endDate = $search->getEndDate();
-
-            $rows = $repository->getSelectedData($search->getStartDate(), $search->getEndDate());
-            $session->set('rows', $rows);
+            
             $site = $search->getSite();
+            $rows = $repository->getSelectedData($search->getStartDate(), $search->getEndDate(), $site);
+            $session->set('rows', $rows);
             return $this->render('@TSDataManager/DataManager/index.html.twig', array(
                 'tab'=>$rows,
                 'site'=>$site,
@@ -42,8 +42,13 @@ class DataManagerController extends Controller
             ));
         }
         $search = $session->get('search');
-        $site = $search->getSite();
-        $rows=$session->get('rows');
+        if ($search) {
+            $site = $search->getSite();
+            $rows=$session->get('rows');
+        } else {
+            $site = null;
+            $rows = array();
+        }
 
         return $this->render('@TSDataManager/DataManager/index.html.twig', array(
             'tab'=>$rows,

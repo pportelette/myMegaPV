@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use TS\RegisterBundle\Entity\Event;
+use TS\RegisterBundle\Entity\Ens;
 use TS\AssetsBundle\Entity\Site;
 use TS\RegisterBundle\Form\EventType;
 use TS\RegisterBundle\Form\EventEditType;
@@ -45,6 +46,17 @@ class RegisterController extends Controller{
 				));
 			}
 			if ($request->request->has('ts_registerbundle_event') && $formNewEvent->handleRequest($request)->isValid()) {
+				if ($event->getEnsOperator() != 0 || $event->getEnsOther() != 0) {
+					$startDate = clone $event->getStartDate();
+					$endDate = $event->getEndDate();
+					do {
+						$ens = new ens();
+						$ens->setEvent($event);
+						$ens->setDate($startDate);
+						$em->persist($ens);
+						$startDate->add(new \DateInterval('P1D'));
+					} while ($startDate <= $endDate);
+				}
 				$em->persist($event);
 				$em->flush();
 

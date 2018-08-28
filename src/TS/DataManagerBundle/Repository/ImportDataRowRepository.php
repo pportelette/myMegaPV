@@ -11,13 +11,15 @@ use Doctrine\ORM\QueryBuilder;
  */
 class ImportDataRowRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getSelectedData($startDate, $endDate)
+    public function getSelectedData($startDate, $endDate, $site)
     {
         $qb = $this->createQueryBuilder('i');
         $qb 
+            ->andWhere('i.site = :siteId')
             ->andWhere('i.date BETWEEN :start AND :end')
             ->setParameter('start', $startDate)
             ->setParameter('end',   $endDate)
+            ->setParameter('siteId',   $site)
         ;
         return $qb
             ->getQuery()

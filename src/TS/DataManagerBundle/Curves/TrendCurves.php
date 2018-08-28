@@ -32,18 +32,34 @@ class TrendCurves
                     'yAxis' => $i,
                     'stacking' => $stacking
                 );
-                $yData[] = array(
-                    'labels' => array(
-                        'formatter' => new Expr('function () { return this.value + " " }'),
-                        'style'     => array('color' => $color)
-                    ),
-                    'gridLineWidth' => 0,
-                    'title' => array(
-                        'text'  => $name,
-                        'style' => array('color' => $color)
-                    ),
-                    'opposite' => $opposite
-                );
+                if ($name != 'PR') {
+                    $yData[] = array(
+                        'labels' => array(
+                            'formatter' => new Expr('function () { return this.value + " " }'),
+                            'style'     => array('color' => $color)
+                        ),
+                        'gridLineWidth' => 0,
+                        'title' => array(
+                            'text'  => $name,
+                            'style' => array('color' => $color)
+                        ),
+                        'opposite' => $opposite
+                    );
+                } else {
+                    $yData[] = array(
+                        'labels' => array(
+                            'formatter' => new Expr('function () { return this.value + " " }'),
+                            'style'     => array('color' => $color)
+                        ),
+                        'gridLineWidth' => 0,
+                        'title' => array(
+                            'text'  => $name,
+                            'style' => array('color' => $color)
+                        ),
+                        'opposite' => $opposite,
+                        'min' => 0
+                    );
+                }
             } else {
                 $series [] = array(
                     'name'  => $name,
@@ -81,6 +97,7 @@ class TrendCurves
         $formatter = new Expr('function () {
                          var unit = {
                              "Energy Injected": "kWh",
+                             "ENS": "kWh",
                              "Irradiation": "Wh/m²",
                              "PR": "%"
                          }[this.series.name];

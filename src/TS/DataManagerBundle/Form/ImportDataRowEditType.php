@@ -14,7 +14,8 @@ class ImportDataRowEditType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->remove('site');
+        $builder->remove('site')
+                ->remove('date');
     }
 
     public function getParent()

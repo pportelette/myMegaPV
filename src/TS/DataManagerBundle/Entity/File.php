@@ -4,6 +4,7 @@ namespace TS\DataManagerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * File
@@ -21,6 +22,11 @@ class File
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+   * @ORM\OneToOne(targetEntity="TS\AssetsBundle\Entity\Site")
+   */
+    private $site;
 
     private $file;
 
@@ -79,5 +85,29 @@ class File
         $name = $this->file->getClientOriginalName();
 
         return $name;
+    }
+
+    /**
+     * Set site.
+     *
+     * @param \TS\AssetsBundle\Entity\Site $site
+     *
+     * @return Substation
+     */
+    public function setSite(\TS\AssetsBundle\Entity\Site $site)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site.
+     *
+     * @return \TS\AssetsBundle\Entity\Site
+     */
+    public function getSite()
+    {
+        return $this->site;
     }
 }

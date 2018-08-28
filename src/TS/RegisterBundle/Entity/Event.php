@@ -92,6 +92,8 @@ class Event
     {
       $this->startDate = new \Datetime();
       $this->endDate = new \Datetime();
+      $this->ensOperator = 0;
+      $this->ensOther = 0;
     }
 
     /**

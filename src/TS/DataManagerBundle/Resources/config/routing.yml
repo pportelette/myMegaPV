@@ -11,7 +11,7 @@ ts_register_removerow:
     defaults: { _controller: TSDataManagerBundle:DataManager:removeRow }
 
 ts_data_manager_save:
-    path:     /save
+    path:     /save/{id}
     defaults: { _controller: TSDataManagerBundle:Import:Save }
 
 ts_data_manager_import:

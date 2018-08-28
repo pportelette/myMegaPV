@@ -19,7 +19,6 @@ class CurvesController extends Controller
     public function curvesAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $session = $request->getSession();
-        $session = $request->getSession();
         $search = new search();
         $ob = new Highchart();
         
@@ -28,6 +27,7 @@ class CurvesController extends Controller
         $irradiationPeriod = 1;
         $PRPeriod = 0;
         $ensPeriod = 0;
+        $availabilityPeriod = 0;
         
         if ($request->isMethod('POST') && $formSearch->handleRequest($request)->isValid()) {
             $repository = $this
@@ -37,11 +37,11 @@ class CurvesController extends Controller
             ;
             $site = $search->getSite();
             $session->set('search', $search);
-            $rows = $repository->getSelectedData($search->getStartDate(), $search->getEndDate());
+            $rows = $repository->getSelectedData($search->getStartDate(), $search->getEndDate(), $site);
             $session->set('rows', $rows);
             foreach ($rows as $row) {
                 $energyRow = $row->getEnergyInjected();
-                $irradiationRow=$row->getIrradiation()*277.77;
+                $irradiationRow=$row->getIrradiation();
                 $powerPeak = $site->getPowerPeak();
                 $ensRow = $row->getEns();
                 $ens[] = $ensRow;
@@ -51,6 +51,7 @@ class CurvesController extends Controller
                 $energies[]=$energyRow;
                 $irradiationPeriod += $irradiationRow;
                 $irradiations[]=$irradiationRow;
+                $availabilityPeriod = $energyPeriod * 100 / ($energyPeriod + $ensPeriod);
                 $PRPeriod = ($energyPeriod + $ensPeriod) * 100000 / ($irradiationPeriod * $powerPeak);
                 $pr[] = ($energyRow + $ensRow) * 100000 / ($irradiationRow * $powerPeak);
             }
@@ -93,6 +94,7 @@ class CurvesController extends Controller
                 'irradiationPeriod'=>$irradiationPeriod,
                 'PRPeriod'=>$PRPeriod,
                 'ensPeriod'=>$ensPeriod,
+                'availabilityPeriod'=>$availabilityPeriod,
                 'formSearch'=>$formSearch->createview()
             ));
         }
@@ -103,6 +105,7 @@ class CurvesController extends Controller
             'irradiationPeriod'=>$irradiationPeriod,
             'PRPeriod'=>$PRPeriod,
             'ensPeriod'=>$ensPeriod,
+            'availabilityPeriod'=>$availabilityPeriod,
             'formSearch'=>$formSearch->createview()
         ));
     }

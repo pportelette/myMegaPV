@@ -28,6 +28,12 @@ class Site
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Client", inversedBy="sites")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $client;
+
+    /**
      * @ORM\OneToMany(targetEntity="TS\DataManagerBundle\Entity\ImportDataRow", mappedBy="site")
      */
     private $importDataRows;
@@ -189,5 +195,29 @@ class Site
 
     public function __toString() {
         return $this->getSiteName();
+    }
+
+    /**
+     * Set client.
+     *
+     * @param \TS\AssetsBundle\Entity\Client $client
+     *
+     * @return Site
+     */
+    public function setClient(\TS\AssetsBundle\Entity\Client $client)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client.
+     *
+     * @return \TS\AssetsBundle\Entity\Client
+     */
+    public function getClient()
+    {
+        return $this->client;
     }
 }

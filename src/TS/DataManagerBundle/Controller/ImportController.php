@@ -23,7 +23,7 @@ class ImportController extends Controller
             $path = "../var/cache/dev/".$file->getName();
 
             $importService = $this->container->get('ts_data_manager.import');
-            $tableau = $importService->importData($path);
+            $tableau = $importService->importDataMC($path);
 
             return $this->render('@TSDataManager/DataManager/import.html.twig', array(
                 'form'=>$form->createview(),
@@ -36,13 +36,12 @@ class ImportController extends Controller
         ));
     }
 
-    public function saveAction(Request $request)
+    public function saveAction(Request $request, $id)
     {
         $tab= $request->getContent();
         $table = json_decode($tab);
         $em = $this->getDoctrine()->getManager();
-        //ligne provisoire
-        $site = $em->getRepository('TSAssetsBundle:Site')->find(1);
+        $site = $em->getRepository('TSAssetsBundle:Site')->find($id);
         
         foreach ($table as $row) {
             $dataRow = new importDataRow();
@@ -67,7 +66,7 @@ class ImportController extends Controller
             $dataRow->setSite($site);
             $em->persist($dataRow);
         }
-        $em->flush();
+        //$em->flush();
 
         return $this->render('@TSDataManager/DataManager/test.html.twig', array(
             'table'=>$table
