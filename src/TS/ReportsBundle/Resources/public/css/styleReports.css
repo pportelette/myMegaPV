@@ -1,0 +1,41 @@
+body
+{
+
+}
+
+.well
+{
+	background-color: white;
+}
+
+thead
+{
+	background-color: #7a86cb;
+	color: white;
+}
+
+td, th
+{
+	text-align: center;
+}
+
+td
+{
+	padding-right: 4px;
+}
+
+fieldset
+{
+	border-color: #7a86cb;
+}
+
+.comentTab
+{
+	text-align: left;
+	background-color: rgba(100, 100, 255, 0.479);
+}
+
+.line
+{
+    font-size: small;
+}

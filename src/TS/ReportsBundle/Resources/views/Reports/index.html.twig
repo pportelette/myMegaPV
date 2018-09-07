@@ -1,0 +1,51 @@
+{% extends "@App//layout.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/tsreports/css/styleReports.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block body %}
+<section id="container">
+   
+
+    <div id="parameters" class="well col-md-6">
+        <h4>Paramètres</h4>
+
+        <div class="well" id="searchDiv">
+        {{ form_start(formReport) }}
+            <table>
+                <tr>
+                    <td><label>Site</label></td>
+                    <td><label>Date début</label></td>
+                    <td><label>Date fin</label></td>
+                </tr>	
+                <tr>
+                    <td>{{ form_widget(formReport.site, {'attr': {'class': 'form-control'}}) }}</td>
+                    <td><span>{{ form_widget(formReport.startDate, {'attr': {'class': 'form-control'}}) }}</span></td>
+                    <td>{{ form_widget(formReport.endDate, {'attr': {'class': 'form-control'}}) }}</td>
+                    <td></td>
+                </tr>
+            </table>
+            <Br/>
+            <div class="well">
+            {{ form_widget(formReport.register) }}
+            {{ form_widget(formReport.rows) }}
+            {{ form_widget(formReport.curve) }}
+            </div>
+        {{ form_widget(formReport.generate, {'attr': {'class': 'btn btn-primary'}}) }}
+        {{ form_rest(formReport) }}
+        {{ form_end(formReport) }}	
+        </div>
+    </div>
+
+    <div id="preview" class="well col-md-6">
+        <h4>Prévisualisation</h4>
+
+    </div>
+
+</section>
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

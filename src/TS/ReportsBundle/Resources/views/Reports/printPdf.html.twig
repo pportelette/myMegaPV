@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Registre</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="c:\wamp\www\mymegapv\web\bundles/tsreports/css/styleReports.css" type="text/css" media="all" />
+    </head>
+
+    <body>
+
+        <div id="preview">
+            {% if (report.register) %}
+                {{ include("@TSReports/Reports/events.html.twig") }}
+            {% endif %}
+            {% if (report.rows) %}
+                {{ include("@TSReports/Reports/dataTable.html.twig") }}
+            {% endif %}
+            {% if (report.curve) %}
+                {{ include("@TSReports/Reports/curveDiv.html.twig") }}
+            {% endif %}
+        </div>
+
+		<script src="c:\wamp\www\mymegapv\web\bundles/app/js/ajax.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		{% if (report.curve) %}
+        <script src="https://code.highcharts.com/6.1.1/highcharts.js"></script>
+        <script type="text/javascript">
+            {{ chart(report.curve.chart) }}
+        </script>
+        {% endif %}
+    </body>
+	
+</html>

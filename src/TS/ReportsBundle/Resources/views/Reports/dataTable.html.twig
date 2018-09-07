@@ -1,0 +1,36 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/tsdatamanager/css/styleView.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+<div class="well">
+    <div id="headerView">
+		<div id="titleView">
+			<h3>Consulter</h3>
+		</div>
+	</div>
+    <table id="tableau" class="table table-bordered table-condensed">
+        <thead>
+			<tr>
+			   <th width="25%">Date</th>
+			   <th width="25%">Energie injectée (kWh)</th>
+			   <th width="25%">Irradiation (Wh/m²)</th>
+			   <th width="25%">Performance Ratio (%)</th>
+			</tr>
+		</thead>
+		<tbody id="importData">
+			{% for line in report.rows %}
+			<tr id="{{ line.id }}" class="line">
+			   <td width="25%">{{ line.date|date('d/m/Y') }}</td>
+			   <td width="25%">{{ (line.energyInjected)|number_format(0, ',', ' ') }}</td>
+			   <td width="25%">{{ (line.irradiation * 277.77)|number_format(0, ',', ' ') }}</td>
+			   <td width="25%">{{ (line.energyInjected * 100000 / (line.irradiation * 277.77 * site.powerPeak))|number_format(2, ',', ' ') }}</td>
+			</tr>
+			{% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% block javascript %}
+    <script src="{{ asset('bundles/tsdatamanager/js/dataManager.js') }}"></script>
+{% endblock %}

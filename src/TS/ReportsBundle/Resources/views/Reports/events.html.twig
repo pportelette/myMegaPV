@@ -1,0 +1,48 @@
+<section id="evenements" class="well">
+	<div id="headerEvents">
+		<div id="titleEvents">
+			<h3>Evénements</h3>
+		</div>
+	</div>
+	<div class="table-responsive">
+	<table class="table table-bordered table-condensed">
+		<thead>
+			<tr>
+			   <th>Date début</th>
+			   <th>Date fin</th>
+			   <th>Id</th>
+			   <th>Id Par</th>
+			   <th>Site</th>
+			   <th>Origine/Cause</th>
+			   <th>Conséquence</th>
+			   <th>Poste</th>
+			   <th>Equip.</th>
+			   <th>Perte</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for event in report.register %}
+			<tr id="{{ event.id }}">
+			   <td>{{ event.startDate|date('d/m/Y H:i') }}</td>
+			   <td>{{ event.endDate|date('d/m/Y H:i') }}</td>
+			   <td>{{ event.id }}</td>
+			   <td>{{ event.id }}</td>
+			   <td>{{ event.site.siteName }}</td>
+			   <td>{{ event.origin }}</td>
+			   <td>{{ event.consequence }}</td>
+			   <td>{{ event.substation.name }}</td>
+			   <td>{{ event.equipment.name }}</td>
+			   <td>{{ event.ens }}</td>
+			</tr>
+			<tr>
+				<td class="comentTab" colspan="11">	
+					<div id="collapse{{event.id}}">
+						<p>{{ event.coment }}</p>
+					</div>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	</div>
+</section>
