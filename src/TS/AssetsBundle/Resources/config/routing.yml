@@ -7,5 +7,7 @@ ts_assets_getsite:
     defaults: { _controller: TSAssetsBundle:Assets:getSite }
 
 ts_assets_new:
-    path:      /new
+    path:      /new/{asset}
     defaults: { _controller: TSAssetsBundle:Assets:newEquipment }
+    requirements:
+        asset: inverter|ppc

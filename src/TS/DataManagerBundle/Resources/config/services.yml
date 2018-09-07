@@ -1,11 +1,11 @@
 services:
     ts_data_manager.import:
-        class: TS\DataManagerBundle\ImportData\ImportData
+        class: TS\DataManagerBundle\Services\ImportData\ImportData
         arguments:
           - "@phpoffice.spreadsheet"
 
     ts_data_manager.curves:
-        class: TS\DataManagerBundle\Curves\TrendCurves
+        class: TS\DataManagerBundle\Services\Curves\TrendCurves
         arguments:
           - "@ob_highcharts.twig.highcharts_extension"
     

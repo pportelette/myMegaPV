@@ -166,6 +166,12 @@ class ImportDataRow
         return $this->site;
     }
 
+    public function addEns($ens)
+    {
+        $this->ens += $ens;
+
+        return $this;
+    }
     /**
      * Set ens.
      *

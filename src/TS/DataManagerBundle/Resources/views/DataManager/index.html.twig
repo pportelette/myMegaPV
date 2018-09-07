@@ -37,8 +37,19 @@
 			   <td width="18%">{{ (line.energyInjected)|number_format(0, ',', ' ') }}</td>
 			   <td width="18%">{{ (line.irradiation)|number_format(0, ',', ' ') }}</td>
          <td width="18%">{{ (line.ens)|number_format(0, ',', ' ') }}</td>
-         <td width="18%">{{ (line.energyInjected * 100 / (line.energyInjected + line.ens))|number_format(2, ',', ' ') }}</td>
-			   <td width="18%">{{ ((line.energyInjected + line.ens) * 100000 / (line.irradiation * site.powerPeak))|number_format(2, ',', ' ') }}</td>
+         
+         {% if line.energyInjected + line.ens != 0 %}
+          <td width="18%">{{ (line.energyInjected * 100 / (line.energyInjected + line.ens))|number_format(2, ',', ' ') }}</td>
+         {% else %}
+          <td width="18%">0</td>
+         {% endif %}
+
+         {% if line.irradiation != 0 %}
+          <td width="18%">{{ ((line.energyInjected + line.ens) * 100000 / (line.irradiation * site.powerPeak))|number_format(2, ',', ' ') }}</td>
+         {% else %}
+          <td width="18%">0</td>
+         {% endif %}
+			   
 			</tr>
 			{% endfor %}
         </tbody>

@@ -1,4 +1,4 @@
 services:
-    TS\RegisterBundle\Form\EventoType:
-        arguments: ['@TS\AssetsBundle\Form\DataTransformer\NumberToSubstationTransformer']
-        tags: [form.type]
+    ts_register.ensvalidator:
+        class: TS\RegisterBundle\Services\EnsValidator\EnsValidator
+        arguments: ["@doctrine.orm.entity_manager"]

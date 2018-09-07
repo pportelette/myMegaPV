@@ -22,7 +22,7 @@ class AppKernel extends Kernel
             new TS\DataManagerBundle\TSDataManagerBundle(),
             new Yectep\PhpSpreadsheetBundle\PhpSpreadsheetBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
-            new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new TS\ReportsBundle\TSReportsBundle(),
         ];
 

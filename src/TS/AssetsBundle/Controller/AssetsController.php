@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
 use TS\AssetsBundle\Entity\Inverter;
 use TS\AssetsBundle\Form\InverterType;
+use TS\AssetsBundle\Entity\Ppc;
+use TS\AssetsBundle\Form\PpcType;
 
 class AssetsController extends Controller{
     
@@ -50,12 +52,19 @@ class AssetsController extends Controller{
 		return $response;
 	}
 	
-	public function newEquipmentAction(Request $request) {
-		$inverter = new Inverter();
-		$form = $this->get('form.factory')->create(InverterType::class, $inverter);
+	public function newEquipmentAction(Request $request, $asset) {
+		switch ($asset) {
+			case "inverter":
+				$equipment = new Inverter();
+				$formType = InverterType::class;
+			case "ppc":
+				$equipment = new Ppc();
+				$formType = PpcType::class;
+		}
+		$form = $this->get('form.factory')->create($formType, $equipment);
 		if($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 			$em = $this->getDoctrine()->getManager();
-			$em->persist($inverter);
+			$em->persist($equipment);
 			$em->flush();
 
 			return $this->redirectToRoute('ts_assets_homepage');

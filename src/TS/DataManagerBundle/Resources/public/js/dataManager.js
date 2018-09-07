@@ -44,6 +44,7 @@ function saveImport() {
 		importData.push(importLine);
 
 	}
+	console.log(importData);
 	url='http://localhost/myMegaPV/web/app_dev.php/datamanager/save/'+siteId;
 	ajaxPost(url, importData, afficher, true);
 }

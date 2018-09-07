@@ -1,6 +1,6 @@
 <?php
 
-namespace TS\DataManagerBundle\Curves;
+namespace TS\DataManagerBundle\Services\Curves;
 
 class Serie
 {

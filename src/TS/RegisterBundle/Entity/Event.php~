@@ -36,11 +36,10 @@ class Event
     private $endDate;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="site_name", type="string", length=40, nullable=true)
+     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Site", cascade={"persist"})
+     * @ORM\JoinColumn(nullable= false)
      */
-    private $siteName;
+    private $site;
 
     /**
      * @var string
@@ -57,32 +56,28 @@ class Event
     private $consequence;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="substation", type="string", length=20, nullable=true)
+     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Substation", cascade={"persist"})
+     * @ORM\JoinColumn(nullable= false)
      */
     private $substation;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="equipement", type="string", length=20, nullable=true)
+     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Equipment", cascade={"persist"})
+     * @ORM\JoinColumn(nullable= false)
      */
-    private $equipement;
+    private $equipment;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="ens_operator", type="float", nullable=true)
+     * @ORM\Column(name="ens", type="float", nullable=true)
      */
-    private $ensOperator;
+    private $ens;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="ens_other", type="float", nullable=true)
+     * @ORM\OneToMany(targetEntity="TS\RegisterBundle\Entity\Ens", mappedBy="event")
      */
-    private $ensOther;
+    private $losses;
 
     /**
      * @var text
@@ -91,6 +86,12 @@ class Event
      */
     private $coment;
 
+    public function __construct()
+    {
+      $this->startDate = new \Datetime();
+      $this->endDate = new \Datetime();
+      $this->ens = 0;
+    }
 
     /**
      * Get id
@@ -151,30 +152,6 @@ class Event
     }
 
     /**
-     * Set siteName
-     *
-     * @param string $siteName
-     *
-     * @return Event
-     */
-    public function setSiteName($siteName)
-    {
-        $this->siteName = $siteName;
-
-        return $this;
-    }
-
-    /**
-     * Get siteName
-     *
-     * @return string
-     */
-    public function getSiteName()
-    {
-        return $this->siteName;
-    }
-
-    /**
      * Set origin
      *
      * @param string $origin
@@ -201,7 +178,7 @@ class Event
     /**
      * Set substation
      *
-     * @param string $substation
+     * @param \TS\AssetsBundle\Entity\Substation $substation
      *
      * @return Event
      */
@@ -215,7 +192,7 @@ class Event
     /**
      * Get substation
      *
-     * @return string
+     * @return \TS\AssetsBundle\Entity\Substation
      */
     public function getSubstation()
     {
@@ -223,75 +200,51 @@ class Event
     }
 
     /**
-     * Set equipement
+     * Set equipment
      *
-     * @param string $equipement
+     * @param \TS\AssetsBundle\Entity\Equipment $equipment
      *
      * @return Event
      */
-    public function setEquipement($equipement)
+    public function setEquipment($equipment)
     {
-        $this->equipement = $equipement;
+        $this->equipment = $equipment;
 
         return $this;
     }
 
     /**
-     * Get equipement
+     * Get equipment
      *
-     * @return string
+     * @return \TS\AssetsBundle\Entity\Equipment
      */
-    public function getEquipement()
+    public function getEquipment()
     {
-        return $this->equipement;
+        return $this->equipment;
     }
 
     /**
-     * Set ensOperator
+     * Set ens
      *
-     * @param float $ensOperator
+     * @param float $ens
      *
      * @return Event
      */
-    public function setEnsOperator($ensOperator)
+    public function setEns($ens)
     {
-        $this->ensOperator = $ensOperator;
+        $this->ens = $ens;
 
         return $this;
     }
 
     /**
-     * Get ensOperator
+     * Get ens
      *
      * @return float
      */
-    public function getEnsOperator()
+    public function getEns()
     {
-        return $this->ensOperator;
-    }
-
-    /**
-     * Set ensOther
-     *
-     * @param float $ensOther
-     *
-     * @return Event
-     */
-    public function setEnsOther($ensOther)
-    {
-        $this->ensOther = $ensOther;
-
-        return $this;
-    }
-
-    /**
-     * Get ensOther
-     *
-     * @return float
-     */
-    public function getEnsOther()
-    {
-        return $this->ensOther;
+        return $this->ens;
     }
 
     /**
@@ -340,5 +293,29 @@ class Event
     public function getConsequence()
     {
         return $this->consequence;
+    }
+
+    /**
+     * Set site.
+     *
+     * @param \TS\AssetsBundle\Entity\Site $site
+     *
+     * @return Event
+     */
+    public function setSite(\TS\AssetsBundle\Entity\Site $site)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site.
+     *
+     * @return \TS\AssetsBundle\Entity\Site
+     */
+    public function getSite()
+    {
+        return $this->site;
     }
 }

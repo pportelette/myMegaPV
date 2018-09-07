@@ -1,14 +1,14 @@
 <?php
 
-namespace TS\DataManagerBundle\Curves;
+namespace TS\DataManagerBundle\Services\Curves;
 
-class ENSSerie extends Serie
+class EnergyInjectedSerie extends Serie
 {
 
     public function __construct()
   {
     $this->setType('column');
-    $this->setColor('#DA4646');
+    $this->setColor('#4572A7');
     $this->setUnit('kWh');
     $this->setStacking('normal');
   }

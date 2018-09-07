@@ -16,5 +16,13 @@ ts_register_listsubstations:
 
 ts_register_listequipments:
     path:   /listequipments/{id}
-    defaults: { _controller: TSRegisterBundle:Register:listequipments}
+    defaults: { _controller: TSRegisterBundle:Register:listEquipments}
+
+ts_register_manageens:
+    path:   /manageens
+    defaults: { _controller: TSRegisterBundle:Register:manageEns}
+
+ts_register_enssave:
+    path:   /manageens/save
+    defaults: { _controller: TSRegisterBundle:Register:save}
 

@@ -22,7 +22,7 @@ class Ens
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TS\RegisterBundle\Entity\Event", inversedBy="losses")
+     * @ORM\ManyToOne(targetEntity="TS\RegisterBundle\Entity\Event")
      * @ORM\JoinColumn(nullable=false)
      */
     private $event;
@@ -47,12 +47,6 @@ class Ens
      * @ORM\Column(name="ensOther", type="float", nullable=true)
      */
     private $ensOther;
-
-    public function __construct()
-    {
-      $this->ensOperator = 0;
-      $this->ensOther = 0;
-    }
 
 
     /**
@@ -140,11 +134,11 @@ class Ens
     /**
      * Set event.
      *
-     * @param \TS\RegisterBundle\Entity\Event $event
+     * @param \OC\PlatformBundle\Entity\Advert $event
      *
      * @return Ens
      */
-    public function setEvent(\TS\RegisterBundle\Entity\Event $event)
+    public function setEvent(\OC\PlatformBundle\Entity\Advert $event)
     {
         $this->event = $event;
 
@@ -154,7 +148,7 @@ class Ens
     /**
      * Get event.
      *
-     * @return \TS\RegisterBundle\Entity\Event
+     * @return \OC\PlatformBundle\Entity\Advert
      */
     public function getEvent()
     {

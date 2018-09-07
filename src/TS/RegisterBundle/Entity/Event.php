@@ -70,16 +70,14 @@ class Event
     /**
      * @var float
      *
-     * @ORM\Column(name="ens_operator", type="float", nullable=true)
+     * @ORM\Column(name="ens", type="float", nullable=true)
      */
-    private $ensOperator;
+    private $ens;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="ens_other", type="float", nullable=true)
+     * @ORM\OneToMany(targetEntity="TS\RegisterBundle\Entity\Ens", mappedBy="event", cascade={"remove", "persist"})
      */
-    private $ensOther;
+    private $losses;
 
     /**
      * @var text
@@ -92,8 +90,7 @@ class Event
     {
       $this->startDate = new \Datetime();
       $this->endDate = new \Datetime();
-      $this->ensOperator = 0;
-      $this->ensOther = 0;
+      $this->ens = 0;
     }
 
     /**
@@ -226,52 +223,34 @@ class Event
         return $this->equipment;
     }
 
+    public function addEns($ens)
+    {
+        $this->ens += $ens;
+
+        return $this;
+    }
     /**
-     * Set ensOperator
+     * Set ens
      *
-     * @param float $ensOperator
+     * @param float $ens
      *
      * @return Event
      */
-    public function setEnsOperator($ensOperator)
+    public function setEns($ens)
     {
-        $this->ensOperator = $ensOperator;
+        $this->ens = $ens;
 
         return $this;
     }
 
     /**
-     * Get ensOperator
+     * Get ens
      *
      * @return float
      */
-    public function getEnsOperator()
+    public function getEns()
     {
-        return $this->ensOperator;
-    }
-
-    /**
-     * Set ensOther
-     *
-     * @param float $ensOther
-     *
-     * @return Event
-     */
-    public function setEnsOther($ensOther)
-    {
-        $this->ensOther = $ensOther;
-
-        return $this;
-    }
-
-    /**
-     * Get ensOther
-     *
-     * @return float
-     */
-    public function getEnsOther()
-    {
-        return $this->ensOther;
+        return $this->ens;
     }
 
     /**
@@ -344,5 +323,43 @@ class Event
     public function getSite()
     {
         return $this->site;
+    }
+
+    /**
+     * Add loss.
+     *
+     * @param \TS\RegisterBundle\Entity\Ens $loss
+     *
+     * @return Event
+     */
+    public function addLoss(\TS\RegisterBundle\Entity\Ens $loss)
+    {
+        $this->losses[] = $loss;
+
+        $loss->setEvent($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove loss.
+     *
+     * @param \TS\RegisterBundle\Entity\Ens $loss
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeLoss(\TS\RegisterBundle\Entity\Ens $loss)
+    {
+        return $this->losses->removeElement($loss);
+    }
+
+    /**
+     * Get losses.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLosses()
+    {
+        return $this->losses;
     }
 }

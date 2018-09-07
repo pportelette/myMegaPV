@@ -1,0 +1,74 @@
+{% extends "@TSRegister//layout.html.twig" %}
+
+{% block body %}	
+	<section id="container">
+        {{ include("@App/App/search.html.twig") }}	
+        <div class="well">
+            <div id="headerEvents">
+                <div id="titleEvents">
+                    <h2>Gestion des pertes</h2>
+                </div>
+                <div id="buttons">
+                    <input onclick="saveEns()" value="Enregistrer" class="btn btn-default"/>
+                </div>
+            </div>
+            <Br/>
+            <div class="table-responsive">
+                <table class="table table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Site</th>
+                            <th>Poste</th>
+                            <th>Equip.</th>
+                            <th>Origine/Cause</th>
+                            <th>Conséquence</th>
+                            <th>Pertes</th>
+                            {% for row in rows %}
+                            <th>{{ row.date|date('d/m') }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in listEvents %}
+                        <tr>
+                            <td>{{ event.id }}</td>
+                            <td>{{ event.site.siteName }}</td>
+                            <td>{{ event.substation.name }}</td>
+                            <td>{{ event.equipment.name }}</td>
+                            <td>{{ event.origin }}</td>
+                            <td>{{ event.consequence }}</td>			   
+                            <td><div id="{{ event.id }}" class="totalEvent" contenteditable>{{ event.ens|number_format(2, '.', '') }}</div></td>
+                            {% for row in rows %}
+                                {% set varEns = "" %}
+                                {% set varEnsId = "" %}
+                                {% for ens in losses %}
+                                    {% if ens.date == row.date and ens.event == event %}
+                                        {% set varEns = ens.ensOther %}
+                                        {% set varEnsId = ens.id %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if varEnsId != "" %}
+                                    <td><div id="ens{{ varEnsId }}" class="contentEditable ensEventDay row{{ event.id }} column{{ row.id }}" contenteditable>{{ varEns|number_format(2, '.', '') }}</div></td>
+                                {% else %}
+                                    <td style="background: grey"></td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="7"></td>
+                            {% for row in rows %}
+                                <td><div id="{{ row.id }}" class="totalDay" contenteditable>{{ row.ens|number_format(2, '.', '') }}</div></td>
+                            {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+	</section>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('bundles/tsregister/js/losses.js') }}"></script>
+{% endblock %}

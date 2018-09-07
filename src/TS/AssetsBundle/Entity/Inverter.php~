@@ -5,12 +5,12 @@ namespace TS\AssetsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="TS\AssetsBundle\Repository\EquipmentRepository")
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"equipment" = "Equipment", "inverter" = "Inverter", "ppc" = "Ppc"})
+ * Inverter
+ *
+ * @ORM\Table(name="inverter")
+ * @ORM\Entity(repositoryClass="TS\AssetsBundle\Repository\InverterRepository")
  */
-class Equipment
+class Inverter
 {
     /**
      * @var int
@@ -22,7 +22,7 @@ class Equipment
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Substation", inversedBy="equipments")
+     * @ORM\ManyToOne(targetEntity="TS\AssetsBundle\Entity\Substation", inversedBy="inverters")
      * @ORM\JoinColumn(nullable=false)
      */
     private $substation;
@@ -42,6 +42,21 @@ class Equipment
     private $brand;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=30)
+     */
+    private $type;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="power", type="integer")
+     */
+    private $power;
+
+
+    /**
      * Get id.
      *
      * @return int
@@ -56,7 +71,7 @@ class Equipment
      *
      * @param string $name
      *
-     * @return Equipment
+     * @return Inverter
      */
     public function setName($name)
     {
@@ -80,7 +95,7 @@ class Equipment
      *
      * @param string $brand
      *
-     * @return Equipment
+     * @return Inverter
      */
     public function setBrand($brand)
     {
@@ -100,11 +115,59 @@ class Equipment
     }
 
     /**
+     * Set type.
+     *
+     * @param string $type
+     *
+     * @return Inverter
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type.
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set power.
+     *
+     * @param int $power
+     *
+     * @return Inverter
+     */
+    public function setPower($power)
+    {
+        $this->power = $power;
+
+        return $this;
+    }
+
+    /**
+     * Get power.
+     *
+     * @return int
+     */
+    public function getPower()
+    {
+        return $this->power;
+    }
+
+    /**
      * Set substation.
      *
      * @param \TS\AssetsBundle\Entity\Substation $substation
      *
-     * @return Equipment
+     * @return Inverter
      */
     public function setSubstation(\TS\AssetsBundle\Entity\Substation $substation)
     {
@@ -121,9 +184,5 @@ class Equipment
     public function getSubstation()
     {
         return $this->substation;
-    }
-
-    public function __toString() {
-        return (string)$this->getName();
     }
 }

@@ -11,13 +11,16 @@ use Doctrine\ORM\QueryBuilder;
  */
 class EventRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getSelectedEvents($startDate, $endDate)
+    public function getSelectedEvents($startDate, $endDate, $site)
     {
         $qb = $this->createQueryBuilder('e');
         $qb 
+            ->andWhere('e.site = :siteId')
+                ->setParameter('siteId',   $site)
             ->andWhere('e.startDate BETWEEN :start AND :end')
-            ->setParameter('start', $startDate)
-            ->setParameter('end',   $endDate)
+                ->setParameter('start', $startDate)
+                ->setParameter('end',   $endDate)
+            ->orderBy('e.startDate', 'ASC')
         ;
         return $qb
             ->getQuery()

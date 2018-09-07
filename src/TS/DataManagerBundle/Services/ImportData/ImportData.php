@@ -1,6 +1,6 @@
 <?php
 
-namespace TS\DataManagerBundle\ImportData;
+namespace TS\DataManagerBundle\Services\ImportData;
 
 class ImportData
 {
