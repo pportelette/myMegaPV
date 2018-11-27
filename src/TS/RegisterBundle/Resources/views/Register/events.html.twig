@@ -1,4 +1,4 @@
-{% block events %}
+﻿{% block events %}
 <section id="evenements" class="well">
 	<div id="headerEvents">
 		<div id="titleEvents">
@@ -44,7 +44,7 @@
 			<tr id="coment{{ event.id }}" style="display: none" class="apparition">
 				<td class="comentTab" colspan="11">	
 					<div id="collapse{{event.id}}" class="collapse">
-						<p>{{ event.coment }}</p>
+						<p>{{ event.coment|nl2br }}</p>
 					</div>
 				</td>
 			</tr>

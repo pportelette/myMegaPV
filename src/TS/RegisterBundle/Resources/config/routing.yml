@@ -6,6 +6,10 @@ ts_register_editevent:
     path:     /editevent/{id}
     defaults: { _controller: TSRegisterBundle:Register:editEvent }
 
+ts_register_alertselection:
+    path:     /alert
+    defaults: { _controller: TSRegisterBundle:Register:alertSelection }
+
 ts_register_removeevent:
     path:      /removeevent/{id}
     defaults: { _controller: TSRegisterBundle:Register:removeEvent }
@@ -19,7 +23,7 @@ ts_register_listequipments:
     defaults: { _controller: TSRegisterBundle:Register:listEquipments}
 
 ts_register_manageens:
-    path:   /manageens
+    path:   /manageens/{idSite}/{startD}/{endD}
     defaults: { _controller: TSRegisterBundle:Register:manageEns}
 
 ts_register_enssave:

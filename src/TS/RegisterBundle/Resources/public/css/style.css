@@ -6,36 +6,40 @@
 .comentTab
 {
 	text-align: left;
-	background-color: rgba(100, 100, 255, 0.479);
+	background-color: rgb(245, 215, 168);
 }
 
 .selection
 {
-	background-color: rgb(100, 100, 255);
+	background-color: #F9A41E;
 }
 
-#headerEvents
-{
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.modal-header::before, .modal-header::after {
+	display: none;
+}
+
+#headerEvents {
 	display: flex;
 	height: 40px;
-}
-
-#titleEvents
-{
-	display: flex;
-	align-items: center;
+	justify-content: space-between;
 	margin-bottom: 10px;
-	color: #7a86cb;
 }
 
-#buttons
-{
-	flex: 1;
-	display: flex;
-	justify-content: right;
+#titleEvents, label {
+	color: rgb(38,38,38, 0.75);
 }
 
 input
 {
 	height: 35px;
 }
+
+h2 {
+	margin-top: 0px;
+}
+

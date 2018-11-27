@@ -1,3 +1,10 @@
+<div class="modal-header">
+    <h4 class="modal-title">Edition evenement</h4>
+    <a id="ensButton" href="{{ path('ts_register_manageens', { 'idSite': event.site.id, 'startD': event.startDate|date('Y-m-d'), 'endD': event.endDate|date('Y-m-d') }) }}">
+        <button class="btn">ENS</button>
+    </a>
+</div>
+
 {{ form_start(formEditEvent) }}
 <div class="modal-body">
     {{ form_errors(formEditEvent) }}
@@ -9,16 +16,13 @@
     {{ form_row(formEditEvent.equipment, {'id': 'editEquipmentInput'}) }}
     {{ form_row(formEditEvent.origin) }}
     {{ form_row(formEditEvent.consequence) }}
-    {{ form_row(formEditEvent.ens) }}
     {{ form_row(formEditEvent.coment) }}
-
 </div>
-<div class="modal-footer">
+<div class="modal-footer">        
     {{ form_widget(formEditEvent.Enregistrer, {'attr': {'class': 'btn btn-info'}}) }}
     <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+
+    {{ form_rest(formEditEvent) }}
+
+    {{ form_end(formEditEvent) }}   
 </div>
-
-{{ form_rest(formEditEvent) }}
-
-{{ form_end(formEditEvent) }}
-

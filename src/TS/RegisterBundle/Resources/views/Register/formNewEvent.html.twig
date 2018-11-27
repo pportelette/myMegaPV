@@ -2,16 +2,26 @@
 
 {{ form_errors(formNewEvent) }}
 
-{{ form_row(formNewEvent.startDate) }}
-{{ form_row(formNewEvent.endDate) }}
+<div class="form-group">
+    {{ form_label(formNewEvent.startDate, "Start date") }}
+    <div class="col-sm-10">
+        {{ form_widget(formNewEvent.startDate) }}
+    </div>
+</div>
+<div class="form-group">
+    {{ form_label(formNewEvent.endDate, "End date") }}
+    <div class="col-sm-10">
+        {{ form_widget(formNewEvent.endDate) }}
+    </div>
+</div>{#
+{{ form_row(formNewEvent.endDate) }}#}
 {{ form_row(formNewEvent.site) }}
 {{ form_row(formNewEvent.substation) }}
 {{ form_row(formNewEvent.equipment) }}
 {{ form_row(formNewEvent.origin) }}
 {{ form_row(formNewEvent.consequence) }}
-{{ form_row(formNewEvent.ens) }}
 {{ form_row(formNewEvent.coment) }}
-</div>
+
 <div class="modal-footer">
     {{ form_widget(formNewEvent.Enregistrer, {'attr': {'class': 'btn btn-info'}}) }}
     <button class="btn btn-info" data-dismiss="modal">Annuler</button>
@@ -20,5 +30,4 @@
 
 {{ form_rest(formNewEvent) }}
 
-{# Fermeture de la balise <form> du formulaire HTML #}
 {{ form_end(formNewEvent) }}
