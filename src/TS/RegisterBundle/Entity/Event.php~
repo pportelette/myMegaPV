@@ -68,14 +68,7 @@ class Event
     private $equipment;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="ens", type="float", nullable=true)
-     */
-    private $ens;
-
-    /**
-     * @ORM\OneToMany(targetEntity="TS\RegisterBundle\Entity\Ens", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="TS\RegisterBundle\Entity\Ens", mappedBy="event", cascade={"remove", "persist"})
      */
     private $losses;
 
@@ -90,7 +83,6 @@ class Event
     {
       $this->startDate = new \Datetime();
       $this->endDate = new \Datetime();
-      $this->ens = 0;
     }
 
     /**
@@ -224,30 +216,6 @@ class Event
     }
 
     /**
-     * Set ens
-     *
-     * @param float $ens
-     *
-     * @return Event
-     */
-    public function setEns($ens)
-    {
-        $this->ens = $ens;
-
-        return $this;
-    }
-
-    /**
-     * Get ens
-     *
-     * @return float
-     */
-    public function getEns()
-    {
-        return $this->ens;
-    }
-
-    /**
      * Set coment
      *
      * @param string $coment
@@ -317,5 +285,53 @@ class Event
     public function getSite()
     {
         return $this->site;
+    }
+
+    /**
+     * Add loss.
+     *
+     * @param \TS\RegisterBundle\Entity\Ens $loss
+     *
+     * @return Event
+     */
+    public function addLoss(\TS\RegisterBundle\Entity\Ens $loss)
+    {
+        $this->losses[] = $loss;
+
+        $loss->setEvent($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove loss.
+     *
+     * @param \TS\RegisterBundle\Entity\Ens $loss
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeLoss(\TS\RegisterBundle\Entity\Ens $loss)
+    {
+        return $this->losses->removeElement($loss);
+    }
+
+    /**
+     * Get losses.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLosses()
+    {
+        return $this->losses;
+    }
+
+    public function getEns() {
+        $ens = 0;
+        $losses = $this->getLosses();
+        foreach ($losses as $loss) {
+            $ens += $loss->getOperator();
+            $ens += $loss->getEnsOther();
+        }
+        return $ens;
     }
 }

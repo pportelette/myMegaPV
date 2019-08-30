@@ -6,6 +6,10 @@ ts_assets_getsite:
     path:      /getsite/{id}
     defaults: { _controller: TSAssetsBundle:Assets:getSite }
 
+ts_assets_getequipment:
+    path:      /getequipment/{id}
+    defaults: { _controller: TSAssetsBundle:Assets:getEquipment }
+
 ts_assets_new:
     path:      /new/{asset}
     defaults: { _controller: TSAssetsBundle:Assets:newEquipment }

@@ -68,13 +68,6 @@ class Event
     private $equipment;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="ens", type="float", nullable=true)
-     */
-    private $ens;
-
-    /**
      * @ORM\OneToMany(targetEntity="TS\RegisterBundle\Entity\Ens", mappedBy="event", cascade={"remove", "persist"})
      */
     private $losses;
@@ -90,7 +83,6 @@ class Event
     {
       $this->startDate = new \Datetime();
       $this->endDate = new \Datetime();
-      $this->ens = 0;
     }
 
     /**
@@ -223,36 +215,6 @@ class Event
         return $this->equipment;
     }
 
-    public function addEns($ens)
-    {
-        $this->ens += $ens;
-
-        return $this;
-    }
-    /**
-     * Set ens
-     *
-     * @param float $ens
-     *
-     * @return Event
-     */
-    public function setEns($ens)
-    {
-        $this->ens = $ens;
-
-        return $this;
-    }
-
-    /**
-     * Get ens
-     *
-     * @return float
-     */
-    public function getEns()
-    {
-        return $this->ens;
-    }
-
     /**
      * Set coment
      *
@@ -361,5 +323,17 @@ class Event
     public function getLosses()
     {
         return $this->losses;
+    }
+
+    public function getEns() {
+        $ens = 0;
+        $pertes = $this->getLosses();
+        if ($pertes != null) {
+            foreach ($pertes as $loss) {
+                $ens += $loss->getEnsOperator();
+                $ens += $loss->getEnsOther();
+            }
+        }
+        return $ens;
     }
 }

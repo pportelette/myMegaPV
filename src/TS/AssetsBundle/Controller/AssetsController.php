@@ -8,8 +8,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
 use TS\AssetsBundle\Entity\Inverter;
 use TS\AssetsBundle\Form\InverterType;
+use TS\AssetsBundle\Form\InverterEditType;
 use TS\AssetsBundle\Entity\Ppc;
 use TS\AssetsBundle\Form\PpcType;
+use TS\AssetsBundle\Form\PpcEditType;
 
 class AssetsController extends Controller{
     
@@ -28,20 +30,23 @@ class AssetsController extends Controller{
 		$em = $this->getDoctrine()->getManager();
 		$listAssets = [];
 		$substations = $em->getRepository('TSAssetsBundle:Site')->find($id)->getSubstations();
-		for ($i=0; $i<count($substations); $i++){
-			$inverters = $em->getRepository('TSAssetsBundle:Substation')->find($substations[$i]->getId())->getEquipments();
-			$sub = $substations[$i]->getName();
+		foreach ($substations as $substation) {
+			$equipments = $substation->getEquipments();
+			$sub = $substation->getName();
 			
-			if (count($inverters) != 0){
-				$inverterstab=[];
-				foreach ($inverters as $inverter) {
-					$inverterstab[] = $inverter->getName();
+			if (count($equipments) != 0){
+				$equipmentstab=[];
+				$equipmentsId=[];
+				foreach ($equipments as $equipment) {
+					$equipmentstab[] = $equipment->getName();
+					$equipmentsId[] = $equipment->getId();
 				}
-				$poste=array('name' =>$sub, 'inverters' => $inverterstab);	
+				$poste=array('name' =>$sub, 'equipments' => $equipmentstab, 'id' => $equipmentsId);	
 			}
 			else {
-				$inv=[];
-				$poste=array('name' =>$sub, 'inverters' => $inv);
+				$equ=[];
+				$equId=[];
+				$poste=array('name' =>$sub, 'equipments' => $equ, 'id' => $equId);
 			}
 			$listAssets[]=$poste;
 		}
@@ -50,6 +55,24 @@ class AssetsController extends Controller{
 		$response->headers->set('content-Type', 'application/json');
 		$response->setContent($json);
 		return $response;
+	}
+
+	public function getEquipmentAction(Request $req, $id)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$equipment = $em->getRepository('TSAssetsBundle:Equipment')->find($id);
+		$type = get_class($equipment);
+		switch ($type) {
+			case 'TS\AssetsBundle\Entity\Inverter':
+				$form = $this->get('form.factory')->create(InverterEditType::class, $equipment);
+			break;
+			case 'TS\AssetsBundle\Entity\Ppc':
+				$form = $this->get('form.factory')->create(PpcEditType::class, $equipment);
+			break;
+		}
+		return $this->render('@TSAssets/Assets/formEquipment.html.twig', array(
+			'form' => $form -> createView()
+		));
 	}
 	
 	public function newEquipmentAction(Request $request, $asset) {

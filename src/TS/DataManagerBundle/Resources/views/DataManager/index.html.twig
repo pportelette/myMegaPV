@@ -6,16 +6,18 @@
 
 {% block body %}
 <section id="container">
+
 {{ include("@App/App/search.html.twig") }}
 
 <div class="well">
+<h4 style="text-align: center">Here you can review the data in the database and eventually correct the values</h4>
     <div id="headerView">
 		<div id="titleView">
-			<h2>Consulter</h2>
+			<h2>Consult</h2>
 		</div>
 		<div id="buttons">
-			<input type="" value="Editer" class="btn btn-default" data-toggle="modal" href="#editRowForm"/>
-			<input type="" value="Supprimer" class="btn btn-default" data-toggle="modal" href="#removeRowForm"/>
+			<input type="" value="Edit" class="btn btn-default" data-toggle="modal" href="#editRowForm"/>
+			<input type="" value="Remove" class="btn btn-default" data-toggle="modal" href="#removeRowForm" disabled="true"/>
 		</div>
 	</div>
 	<Br/>
@@ -23,10 +25,10 @@
         <thead>
 			<tr>
 			   <th width="10%">Date</th>
-			   <th width="18%">Energie injectée (kWh)</th>
+			   <th width="18%">Injected energy (kWh)</th>
 			   <th width="18%">Irradiation (Wh/m²)</th>
          <th width="18%">ENS (kWh)</th>
-         <th width="18%">Disponibilité (%)</th>
+         <th width="18%">Availavility (%)</th>
 			   <th width="18%">Performance Ratio (%)</th>
 			</tr>
 		</thead>
@@ -60,7 +62,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Edition données</h4>
+        <h4 class="modal-title">Data edition</h4>
       </div>
       <div id="editForm">
       </div>

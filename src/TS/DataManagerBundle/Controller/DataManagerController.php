@@ -35,15 +35,22 @@ class DataManagerController extends Controller
             $site = $search->getSite();
             $rows = $repository->getSelectedData($search->getStartDate(), $search->getEndDate(), $site);
             $session->set('rows', $rows);
+
             return $this->render('@TSDataManager/DataManager/index.html.twig', array(
                 'tab'=>$rows,
                 'site'=>$site,
                 'formSearch'=>$formSearch->createview()
             ));
         }
-        $search = $session->get('search');
-        if ($search) {
-            $site = $search->getSite();
+        $searche = $session->get('search');
+        if ($searche) {
+            $site = $searche->getSite();
+            $startDate = $searche->getStartDate();
+            $endDate = $searche->getEndDate();
+            
+            $search->setStartDate($startDate);
+            $search->setEndDate($endDate);
+            $formSearch = $this->get('form.factory')->create(SearchType::class, $search);
             $rows=$session->get('rows');
         } else {
             $site = null;

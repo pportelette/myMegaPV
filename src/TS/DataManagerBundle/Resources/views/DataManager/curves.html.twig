@@ -9,8 +9,8 @@
 {{ include("@App/App/search.html.twig") }}
 
 <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#curveDiv" aria-controls="curveDiv" role="tab" data-toggle="tab">Graphique</a></li>
-    <li role="presentation"><a href="#statDiv" aria-controls="statDiv" role="tab" data-toggle="tab">Statistiques</a></li>
+    <li role="presentation" class="active"><a href="#curveDiv" aria-controls="curveDiv" role="tab" data-toggle="tab">Graph</a></li>
+    <!--<li role="presentation"><a href="#statDiv" aria-controls="statDiv" role="tab" data-toggle="tab">Stats</a></li>-->
 </ul>
 <div class="tab-content">
 <div id="parameters" class="well col-md-2" style="display: none">
@@ -51,39 +51,33 @@
 </div>
 
 {% if (result) %}
-<div id="curveDiv" role="tabpanel" class="tab-pane active">
-    {{ include("@TSDataManager/DataManager/curveDiv.html.twig") }}
-</div>
-
-<div id="generalInfo" class="well col-md-2">
-    <h4>Données cumulées sur la période</h4>
-    <table>
-        <tr>
-            <td style="text-align: left">Energie :</td>
-            <td style="text-align: right"><strong>{{ result.energyPeriod|number_format(0, ',', ' ') }}</strong></td>
-            <td style="text-align: left"><strong>kWh</strong></td>
-        </tr>
-        <tr>
-            <td style="text-align: left">END :</td>
-            <td style="text-align: right"><strong>{{ result.ensPeriod|number_format(0, ',', ' ') }}</strong></td>
-            <td style="text-align: left"><strong>kWh</strong></td>
-        </tr>
-        <tr>
-            <td style="text-align: left">Irradiance :</td>
-            <td style="text-align: right"><strong>{{ result.irradiationPeriod|number_format(0, ',', ' ') }}</strong></td>
-            <td style="text-align: left"><strong>Wh/m²</strong></td>
-        </tr>
-        <tr>
-            <td style="text-align: left">Disponibilité :</td>
-            <td style="text-align: right"><strong>{{ result.availabilityPeriod|number_format(2, ',', ' ') }}</strong></td>
-            <td style="text-align: left"><strong>%</strong></td>
-        </tr>
-        <tr>
-            <td style="text-align: left">PR :</td>
-            <td style="text-align: right"><strong>{{ result.PRPeriod|number_format(2, ',', ' ') }}</strong></td>
-            <td style="text-align: left"><strong>%</strong></td>
-        </tr>
-    </table>
+<div id="curveDiv" role="tabpanel" class="well tab-pane active col-md-12">
+    <div id="linechart" class="col-md-10" style=""></div>
+    <div id="generalInfo" class="col-md-2">
+        <h4>Cumulated data over the period</h4>
+        <div class="statPeriod">
+            <div class="lineStat">
+                <p style="text-align: left">Energy:</p>
+                <p style="text-align: right"><strong>{{ result.energyPeriod|number_format(0, ',', ' ') }} kWh</strong></p>
+            </div>
+            <div class="lineStat">
+                <p style="text-align: left">ENS:</p>
+                <p style="text-align: right; padding: 0px;"><strong>{{ result.ensPeriod|number_format(0, ',', ' ') }} kWh</strong></p>
+            </div>
+            <div class="lineStat">
+                <p style="text-align: left">Irradiation:</p>
+                <p style="text-align: right"><strong>{{ result.irradiationPeriod|number_format(0, ',', ' ') }} Wh/m²</strong></p>
+            </div>
+            <div class="lineStat">
+                <p style="text-align: left">Availability:</p>
+                <p style="text-align: right"><strong>{{ result.availabilityPeriod|number_format(2, ',', ' ') }} %</strong></p>
+            </div>
+            <div class="lineStat">
+                <p style="text-align: left">PR:</p>
+                <p style="text-align: right"><strong>{{ result.PRPeriod|number_format(2, ',', ' ') }} %</strong></p>
+            </div>
+        </div>
+    </div>
 </div>
 {% endif %}
 <div id="statDiv" role="tabpanel" class="well tab-pane">
@@ -97,4 +91,10 @@ blabla
     <script src="{{ asset('bundles/tsdatamanager/js/dataManager.js') }}"></script>
     <script src="{{ asset('bundles/tsdatamanager/js/curves.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    {% if (result) %}
+    <script src="//code.highcharts.com/6.1.1/highcharts.js"></script>
+    <script type="text/javascript">
+        {{ chart(result.chart) }}
+    </script>
+    {% endif %}
 {% endblock %}

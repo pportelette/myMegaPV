@@ -1,8 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title">Edition evenement</h4>
-    <a id="ensButton" href="{{ path('ts_register_manageens', { 'idSite': event.site.id, 'startD': event.startDate|date('Y-m-d'), 'endD': event.endDate|date('Y-m-d') }) }}">
-        <button class="btn">ENS</button>
-    </a>
+    <h4 class="modal-title">Edit event</h4>
 </div>
 
 {{ form_start(formEditEvent) }}
@@ -20,7 +17,7 @@
 </div>
 <div class="modal-footer">        
     {{ form_widget(formEditEvent.Enregistrer, {'attr': {'class': 'btn btn-info'}}) }}
-    <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+    <button class="btn btn-info" data-dismiss="modal">Cancel</button>
 
     {{ form_rest(formEditEvent) }}
 

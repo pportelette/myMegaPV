@@ -1,3 +1,3 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+ts_homepage_home:
+    path:     /
+    defaults: { _controller: AppBundle:App:index }

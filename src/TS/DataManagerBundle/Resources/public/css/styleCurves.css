@@ -1,9 +1,11 @@
 #parameters{
-    height: 480px;
+    height: 600px;
 }
-
+#curveDiv {
+    height: 90%;
+}
 #linechart{
-    padding: 2px;
+
 }
 
 .onoffswitch {
@@ -48,4 +50,24 @@
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
+}
+label {
+	color: rgb(38,38,38, 0.75);
+}
+.statPeriod {
+    margin-top: 40px;
+}
+.lineStat {
+    margin-bottom: 15px;
+    border-top: #F9A41E solid 1px;
+}
+p {
+    margin: 0px;
+}
+.tab-pane {
+    margin-top: 10px;
+    display: flex;
+}
+h4 {
+    color: rgb(38,38,38, 0.75);
 }

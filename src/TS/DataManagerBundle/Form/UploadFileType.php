@@ -18,7 +18,7 @@ class UploadFileType extends AbstractType
         'choice_label' => 'siteName'
     ))
       ->add('file',     FileType::class)
-      ->add('Ouvrir',   SubmitType::class)
+      ->add('Open',   SubmitType::class)
     ;
   }
 }

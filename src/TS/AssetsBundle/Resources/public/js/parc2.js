@@ -11,39 +11,21 @@ function SelectSite(obj)
 	elmtt.value=idSite;
 	elmtt.innerHTML=nomSite;
 	url = "getsite/"+idSite;
-	ajaxGet(url, readData);
+	ajaxGet(url, makeTree);
 }
 
-function request() 
-{
-	var numid = document.getElementById("nomSiteArbre").value;
-	var xhr   = new XMLHttpRequest();
-		
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 0)) {
-			readData(xhr.responseXML);
-		} else if (xhr.readyState < 4) {
-		}
-	};
-	
-	xhr.open("POST", "parc3.php", true);
-	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xhr.send("IdSite="+numid);
-}
-
-
-function readData(oData) {
+function makeTree(oData) {
 	var json=JSON.parse(oData);
 	var html = "";
 	
 	json.listAssets.forEach(function (substation) {
 		html +="<div class=\"parent\">";
 		html += substation.name;
-		substation.inverters.forEach(function (inverter) {
-			html +="<div>";
-			html += inverter;
+		for (var i = 0; i < substation.equipments.length; i++) {//forEach(function (equipment) {
+			html +="<div id=\""+substation.id[i]+"\" onclick=\"SelectEqu(this)\">";
+			html +="<p>"+substation.equipments[i]+"</p>";
 			html +="</div>";
-		});
+		};
 		html +="</div>";
 	});
 	
@@ -101,17 +83,19 @@ function readData(oData) {
 			}
 		}
 	}
-
-	var oSelect = document.getElementById("architecture");
-	oSelect.innerHTML=html;*/
+;*/
 }
 
-function SelectMateriel(obj)
+function SelectEqu(obj)
 {
-	//var nomMateriel = obj.innerHTML;
-	var elmtt = document.getElementById("nomMateriel");
-	var div = document.getElementById("description");
-	div.style = "display: inline-block";
-	elmtt.innerHTML=obj;
+	var equId = obj.id;
+	url = "getequipment/"+equId;
+	ajaxGet(url, displayEquipment);
 	return false;
+}
+
+function displayEquipment (html) {
+	var div = document.getElementById("description");
+	div.innerHTML = html;
+	div.style = "display: inline-block";
 }

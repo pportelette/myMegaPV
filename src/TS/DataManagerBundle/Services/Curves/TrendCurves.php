@@ -109,9 +109,9 @@ class TrendCurves
                         'formatter' => new Expr('function () { return this.value + " " }'),
                         'style'     => array('color' => $color)
                     ),
-                    'gridLineWidth' => 0,
+                    'gridLineWidth' => 1,
                     'title' => array(
-                        'text'  => $name,
+                        'text'  => null,
                         'style' => array('color' => $color)
                     ),
                     'opposite' => $opposite,
@@ -131,9 +131,9 @@ class TrendCurves
                         'formatter' => new Expr('function () { return this.value + " " }'),
                         'style'     => array('color' => $color)
                     ),
-                    'gridLineWidth' => 0,
+                    'gridLineWidth' => 1,
                     'title' => array(
-                        'text'  => '',
+                        'text'  => null,
                         'style' => array('color' => $color)
                     ),
                     'opposite' => $opposite
@@ -150,16 +150,17 @@ class TrendCurves
         $ob->title->text($site->getSiteName());
         $ob->xAxis->categories($categories);
         $ob->yAxis($yData);
-        $ob->legend->enabled(false);
+        $ob->legend->enabled(true);
+        $ob->credits->enabled(false);
         $formatter = new Expr('function () {
-                         var unit = {
-                             "Energy Injected": "kWh",
-                             "ENS": "kWh",
-                             "Irradiation": "Wh/m²",
-                             "PR": "%"
-                         }[this.series.name];
-                         return this.x + ": <b>" + this.y.toFixed(2) + "</b> " + unit;
-                     }');
+            var unit = {
+                "Energy Injected": "kWh",
+                "ENS": "kWh",
+                "Irradiation": "Wh/m²",
+                "PR": "%"
+            }[this.series.name];
+            return this.x + ": <b>" + this.y.toFixed(2) + "</b> " + unit;
+        }');
         $ob->tooltip->formatter($formatter);
         $ob->series($series);
 

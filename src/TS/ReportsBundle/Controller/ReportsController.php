@@ -51,6 +51,9 @@ class ReportsController extends Controller
                 $result = $curvesService->trend($site, $rows);
                 $report->setCurve($result);
                 }
+
+                $footer = $this->renderView('@TSReports/Reports/footer.html.twig');
+
                 $html = $this->renderView('@TSReports/Reports/printPdf.html.twig', array(
                     'report' => $report,
                     'site'=>$site,
@@ -61,7 +64,8 @@ class ReportsController extends Controller
                     "C:/wamp64/www/project/web/snappy/file.pdf", 
                     array(
                         'disable-javascript' => false,
-                        'javascript-delay' => 3000
+                        'javascript-delay' => 3000,
+                        'footer-html' =>$footer,
                     ),
                     true
                 );

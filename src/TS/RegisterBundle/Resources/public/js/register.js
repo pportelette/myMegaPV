@@ -15,7 +15,7 @@ function SelectLigne(obj)
 	removeform.action = "removeevent/"+obj.id;
 	if (ObjSelec!=null)
 	{
-		if (coment != "\n\t\t\t\t\t\t\n\t\t\t\t\t")
+		if (coment != "\n\t\t\t\t\t\t<p></p>\n\t\t\t\t\t")
 		{
 			if (ObjSelec != obj){
 				ObjSelec.className = "default";
@@ -35,6 +35,7 @@ function SelectLigne(obj)
 				ObjSelec = null;
 				ComSelect = null;
 				CollapseSelect = null;
+				editChoice();
 			}
 		}
 		else
@@ -51,7 +52,7 @@ function SelectLigne(obj)
 	}
 	else
 	{
-		if (coment != "\n\t\t\t\t\t\t\n\t\t\t\t\t")
+		if (coment != "\n\t\t\t\t\t\t<p></p>\n\t\t\t\t\t")
 		{
 			obj.className="selection";
 			lineComent.style="display: yes";
@@ -80,8 +81,12 @@ function editChoice() {
 	}
 	else
 	{
-		alert("Vous n'avez rien sélectionné !!");
+		ajaxGet("alert", alertSelection);
 	}
+}
+function alertSelection(data) {
+	var oSelect = document.getElementById("editForm");
+	oSelect.innerHTML=data;
 }
 
 function inputForm(data) {

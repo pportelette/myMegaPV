@@ -27,7 +27,9 @@ class ImportDataRowType extends AbstractType
                 'class'         =>  'TSAssetsBundle:Site',
                 'choice_label'  =>  'siteName'
             ))
-            ->add('Enregistrer',    SubmitType::class);
+            ->add('Save',    SubmitType::class, array(
+                'disabled' => 'disabled'
+            ));
     }/**
      * {@inheritdoc}
      */

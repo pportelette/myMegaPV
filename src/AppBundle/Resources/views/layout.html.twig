@@ -12,28 +12,25 @@
     <body>
 		<header>
 			<div id="titre_principal">
-				<div id="vignette">
-					<img src="{{ asset('bundles/app/images/index.png') }}" alt="Logo TS" id="logo" />
-					<h1 id="titre">MEGA.PV</h1>
-				</div>
+				<a href="{{ path('ts_homepage_home')}}">
+					<div id="vignette">
+						<img src="{{ asset('bundles/app/images/LogoDarkGrey.png') }}" alt="Logo TS" id="logo" />
+						<h1 id="titre">MEGA.PV</h1>
+					</div>
+				</a>
 				<div id="menu">
 					<nav>
-						<ul class="nav nav-pills">
-							<li role="presentation"><a href="{{ path('ts_register_homepage')}}">Registre</a></li>
-							<li role="presentation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestion des parcs <span class="caret"></span></a>
+						<ul class="nav nav-inline">
+							<li role="presentation"><a href="{{ path('ts_register_homepage')}}">Register</a></li>
+							<li role="presentation"><a href="{{ path('ts_assets_homepage')}}">Assets</a></li>
+							<li role="presentation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="register" role="button" aria-haspopup="true" aria-expanded="false">Data & analysis <span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a href="{{ path('ts_assets_homepage')}}">Parcs</a></li>
-									<li><a href="newParc.php">Nouveau parc</a></li>
+									<li><a href="{{ path('ts_data_manager_import')}}">Import</a></li>
+									<li><a href="{{ path('ts_data_manager_homepage')}}">Manage</a></li>
+									<li><a href="{{ path('ts_data_manager_curves')}}">Graph & analysis</a></li>
 								</ul>
 							</li>
-							<li role="presentation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="register" role="button" aria-haspopup="true" aria-expanded="false">Données et analyse <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="{{ path('ts_data_manager_import')}}">Importer</a></li>
-									<li><a href="{{ path('ts_data_manager_homepage')}}">Consulter</a></li>
-									<li><a href="{{ path('ts_data_manager_curves')}}">Courbes et analyse</a></li>
-								</ul>
-							</li>
-							<li role="presentation"><a href="{{ path('ts_reports_homepage')}}">Rapports</a></li>
+							<li role="presentation"><a href="{{ path('ts_reports_homepage')}}">Reports</a></li>
 						</ul>
 					</nav>
 				</div>

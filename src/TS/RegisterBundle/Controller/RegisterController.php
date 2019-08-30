@@ -47,22 +47,21 @@ class RegisterController extends Controller{
 				));
 			}
 			if ($request->request->has('ts_registerbundle_event') && $formNewEvent->handleRequest($request)->isValid()) {
-				if ($event->getEns() != 0) {
-					$startDate = clone $event->getStartDate();
-					$startDate->setTime(0, 0);
-					$endDate = clone $event->getEndDate();
-					$endDate->setTime(0, 0);
-					do {
-						$ens = new ens();
-						$date = clone $startDate;
-						$ens->setEvent($event);
-						$ens->setDate($date);
-						$event->addLoss($ens);
-						$startDate->add(new \DateInterval('P1D'));
-					} while ($startDate <= $endDate);
-				}
+				$startDate = clone $event->getStartDate();
+				$startDate->setTime(0, 0);
+				$endDate = clone $event->getEndDate();
+				$endDate->setTime(0, 0);
+				do {
+					$ens = new ens();
+					$date = clone $startDate;
+					$ens->setEvent($event);
+					$ens->setDate($date);
+					$event->addLoss($ens);
+					$startDate->add(new \DateInterval('P1D'));
+				} while ($startDate <= $endDate);
+
 				$em->persist($event);
-				$em->flush();
+				//$em->flush();
 
 				return $this->redirectToRoute('ts_register_homepage');
 			}
@@ -95,7 +94,7 @@ class RegisterController extends Controller{
 		if($request->isMethod('POST') && $formEditEvent->handleRequest($request)->isValid()) {
 			//$eventForm = $request->request->get('event_edit');
 			//$eventEdited->setStartDate($eventForm['startDate']);
-			$em->flush();
+			//$em->flush();
 			return $this->redirectToRoute('ts_register_homepage');
 		}
 
@@ -103,6 +102,10 @@ class RegisterController extends Controller{
 			'event' => $eventEdited,
 			'formEditEvent' => $formEditEvent -> createView()
 		));
+	}
+
+	public function alertSelectionAction () {
+		return $this->render('@TSRegister/Register/alertSelection.html.twig');
 	}
 
 	public function removeEventAction (Request $request, $id) {
@@ -113,7 +116,7 @@ class RegisterController extends Controller{
 		$event = $searchService->searchInListById($listEvents, $id);
 		
 		$em->remove($em->merge($event));
-		$em->flush();
+		//$em->flush();
 
 		return $this->redirectToRoute('ts_register_homepage');
 	}
@@ -139,14 +142,19 @@ class RegisterController extends Controller{
 		return $response;
 	}
 
-	public function manageEnsAction (Request $request) {
+	public function manageEnsAction (Request $request, $idSite, $startD, $endD) {
 		$em = $this->getDoctrine()->getManager();
 		$session = $request->getSession();
 		$listSites = $em->getRepository('TSAssetsBundle:Site')->findAll();
 
+		$startDate = new \DateTime($startD);
+		$endDate = new \DateTime($endD);
+
 		$search = new search();
+		$search->setStartDate($startDate);
+		$search->setEndDate($endDate);
 		$formSearch = $this->get('form.factory')->create(SearchType::class, $search);
-		
+
 		if($request->isMethod('POST')) {
 			if ($request->request->has('appbundle_search') && $formSearch->handleRequest($request)->isValid()) {
 				$session->set('search', $search);
@@ -173,7 +181,6 @@ class RegisterController extends Controller{
 				$session->set('listEvents', $listEvents);
 
 				$rows = $dataRowRepository->getSelectedData($startDate, $endDate, $site);
-				$session->set('rows', $rows);
 				
 				return $this->render('@TSRegister/Register/losses.html.twig', array(
 					'listSites' => $listSites, 
@@ -189,12 +196,37 @@ class RegisterController extends Controller{
 				return $this->redirectToRoute('ts_register_homepage');
 			}
 		}
-		$listEvents = $session->get('lisEvents');
-		$rows = $session->get('rows');
+		$startDate = new \DateTime($startD);
+		$endDate = new \DateTime($endD);
+
+		$search = new search();
+		$search->setStartDate($startDate);
+		$search->setEndDate($endDate);
+		$search->setSite($em->getRepository('TSAssetsBundle:Site')->find($idSite));
+		$formSearch = $this->get('form.factory')->create(SearchType::class, $search);
+
+		$eventRepository = $em->getRepository('TSRegisterBundle:Event');
+		$dataRowRepository = $em->getRepository('TSDataManagerBundle:ImportDataRow');
+		$ensRepository = $em->getRepository('TSRegisterBundle:Ens');
+		
+		$losses = $ensRepository->getSelectedEns($startDate, $endDate, $idSite);
+		$listEvents = [];
+		foreach ($losses as $loss) {
+			$event = $loss->getEvent();
+			if (in_array($event, $listEvents)) {
+
+			} else {
+				$listEvents[] = $event;
+			}
+		}
+
+		$rows = $dataRowRepository->getSelectedData($startDate, $endDate, $idSite);
+
 		return $this->render('@TSRegister/Register/losses.html.twig', array(
 			'listSites' => $listSites,
 			'listEvents' => $listEvents,
 			'rows'=>$rows,
+			'losses'=>$losses,
 			'formSearch' => $formSearch -> createView()
 		));
 	}

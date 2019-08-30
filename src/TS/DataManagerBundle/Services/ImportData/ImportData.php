@@ -41,10 +41,10 @@ class ImportData
         $tableau = [];
         for ($row = 2; $row <= $highestRow; ++$row) {
             $datestr = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-            $date = mktime(0,0,0,1,$datestr-1,1900);
+            //$date = mktime(0,0,0,1,$datestr-1,1900);
             $energyInjected = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
             $irradiation = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-            $importRow = array('id' => $row, 'date' => $date, 'energy' => $energyInjected, 'irradiation' => $irradiation);
+            $importRow = array('id' => $row, 'date' => $datestr, 'energy' => $energyInjected, 'irradiation' => $irradiation);
             $tableau[] = $importRow;
         }
 

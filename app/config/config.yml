@@ -72,9 +72,15 @@ knp_snappy:
     pdf:
         enabled:    true
         binary:     "C:\\wkhtmltopdf\\bin\\wkhtmltopdf.exe"
-        options:    []
+        options:
+            margin-left: 15mm
+            margin-right: 15mm
+            margin-top: 15mm
+            margin-bottom: 15mm
+            orientation: landscape
     image:
         enabled:    true
         binary:     "C:\\wkhtmltopdf\\bin\\wkhtmltoimage.exe"
         options:    []
+            
     temporary_folder: "%kernel.project_dir%\\web\\snappy"

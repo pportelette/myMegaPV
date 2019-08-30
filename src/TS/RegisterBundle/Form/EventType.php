@@ -35,7 +35,6 @@ class EventType extends AbstractType
             ))
             ->add('origin',         TextType::class)
             ->add('consequence',    TextType::class)
-            ->add('ens',            NumberType::class)
             ->add('coment',         TextareaType::class)
             ->add('Enregistrer',    SubmitType::class)
         ;

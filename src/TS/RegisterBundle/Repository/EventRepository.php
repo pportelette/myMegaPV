@@ -11,6 +11,17 @@ use Doctrine\ORM\QueryBuilder;
  */
 class EventRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function myFindAll() {
+        $qb = $this->createQueryBuilder('e');
+        $qb 
+            ->leftJoin('e.losses', 'losses')
+            ->addSelect('losses')
+        ;
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     public function getSelectedEvents($startDate, $endDate, $site)
     {
         $qb = $this->createQueryBuilder('e');

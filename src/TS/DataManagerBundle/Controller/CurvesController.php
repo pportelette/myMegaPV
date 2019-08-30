@@ -15,7 +15,7 @@ class CurvesController extends Controller
         $session = $request->getSession();
         $curvesService = $this->container->get('ts_data_manager.curves');
         
-        $search = new search();
+        $search = new Search();
         $formSearch = $this->get('form.factory')->create(SearchType::class, $search);
                 
         if ($request->isMethod('POST') && $formSearch->handleRequest($request)->isValid()) {
@@ -29,7 +29,7 @@ class CurvesController extends Controller
             $rows = $repository->getSelectedData($search->getStartDate(), $search->getEndDate(), $site);
             $session->set('rows', $rows);
 
-            $result = $curvesService->trend($site, $rows);
+            $result = $curvesService->trend($site, $rows, 1, 1, 1);
 
             return $this->render('@TSDataManager/DataManager/curves.html.twig', array(
                 'result'=>$result,
@@ -37,10 +37,17 @@ class CurvesController extends Controller
             ));
         }
         
-        $search = $session->get('search');
+        $searche = $session->get('search');
         
-        if ($search) {
-            $site = $search->getSite();
+        if ($searche) {
+            $site = $searche->getSite();
+			$startDate = $searche->getStartDate();
+            $endDate = $searche->getEndDate();
+            
+            $search->setStartDate($startDate);
+            $search->setEndDate($endDate);
+
+            $formSearch = $this->get('form.factory')->create(SearchType::class, $search);
             $rows = $session->get('rows');
             
             $result = $curvesService->trend($site, $rows);

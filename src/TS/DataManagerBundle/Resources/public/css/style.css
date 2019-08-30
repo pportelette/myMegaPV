@@ -26,15 +26,20 @@
 
 .selection
 {
-	background-color: rgb(100, 100, 255);
+	background-color: #F9A41E;
 }
-
+input[type="file"] {
+	height: 34px;
+}
 h2
 {
 	display: flex;
 	align-items: center;
 	margin-bottom: 10px;
-	color: #7a86cb;
+	color: rgb(38,38,38, 0.75);
+}
+label {
+	color: rgb(38,38,38, 0.75);
 }
 
 #tableau {

@@ -1,5 +1,8 @@
 h2 {
-	color: #7a86cb;
+	color: rgba(38, 38, 38, 0.75);
+}
+p {
+	margin: 0px;
 }
 /*Arbre*/
 #containerAssets
@@ -9,11 +12,11 @@ h2 {
 	margin-left: 30px;
 }
 #clientsite{
-	height: 480px;
+	min-height: 480px;
 	overflow:auto;
 }
 #arborescence{
-	height: 480px;
+	min-height: 480px;
 	overflow:auto;
 	margin-left: 4px;
 }

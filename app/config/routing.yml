@@ -1,3 +1,7 @@
+ts_homepage:
+    resource: '@AppBundle/Resources/config/routing.yml'
+    prefix: /
+    
 ts_reports:
     resource: "@TSReportsBundle/Resources/config/routing.yml"
     prefix:   /reports
@@ -13,6 +17,3 @@ ts_assets:
 ts_register:
     resource: "@TSRegisterBundle/Resources/config/routing.yml"
     prefix:   /register
-
-app:
-    resource: '@AppBundle/Resources/config/routing.yml'
