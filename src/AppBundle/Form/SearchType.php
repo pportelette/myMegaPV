@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use AppBundle\Entity\Search;
 
 
 class SearchType extends AbstractType
@@ -22,7 +23,10 @@ class SearchType extends AbstractType
                 'class'        => 'TSAssetsBundle:Site',
                 'choice_label' => 'siteName',
                 'multiple'    => false,
-                'expanded' => false
+                'expanded' => false,
+                'group_by' => function($site) {
+                    return $site->getClient()->getClientName();
+                }
             ))
             ->add('startDate',  DateType::class, array(
                 'widget' => 'single_text'
