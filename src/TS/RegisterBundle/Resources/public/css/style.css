@@ -42,4 +42,6 @@ input
 h2 {
 	margin-top: 0px;
 }
-
+#searchDiv div.dateInfo {
+	display: none;
+}
