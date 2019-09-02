@@ -1,5 +1,7 @@
 {% extends "@App//layout.html.twig" %}
 
+{% block title %}{{ parent() }} - Data management{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('bundles/tsdatamanager/css/styleView.css') }}" type="text/css" media="all" />
 {% endblock %}

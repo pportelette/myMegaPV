@@ -49,7 +49,9 @@ a:hover {
 	margin-left: 20px;
 	width: 30px;
 }
-
+input[type="date"].form-control {
+	line-height: inherit;
+}
 #menu
 {
 	flex: 1;

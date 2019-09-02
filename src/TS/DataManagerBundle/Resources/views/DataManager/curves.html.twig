@@ -1,5 +1,7 @@
 {% extends "@App//layout.html.twig" %}
 
+{% block title %}{{ parent() }} - Graph&Analysis{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('bundles/tsdatamanager/css/styleCurves.css') }}" type="text/css" media="all" />
 {% endblock %}
