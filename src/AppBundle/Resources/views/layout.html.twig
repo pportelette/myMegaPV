@@ -23,7 +23,7 @@
 						<ul class="nav nav-inline">
 							<li role="presentation"><a href="{{ path('ts_register_homepage')}}">Register</a></li>
 							<li role="presentation"><a href="{{ path('ts_assets_homepage')}}">Assets</a></li>
-							<li role="presentation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="register" role="button" aria-haspopup="true" aria-expanded="false">Data & analysis <span class="caret"></span></a>
+							<li role="presentation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Data & analysis <span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><a href="{{ path('ts_data_manager_import')}}">Import</a></li>
 									<li><a href="{{ path('ts_data_manager_homepage')}}">Manage</a></li>
@@ -41,7 +41,7 @@
 		{% endblock %}
 
 		<script src="{{ asset('bundles/app/js/ajax.js') }}"></script>
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="{{ asset('bundles/app/js/jquery-3.3.1.slim.min.js')}}"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
 		{% block javascript %}
